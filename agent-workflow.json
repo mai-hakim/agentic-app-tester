@@ -1,0 +1,211 @@
+{
+  "id": "agenticTester01",
+  "name": "Agentic App Tester",
+  "active": false,
+  "nodes": [
+    {
+      "id": "b1",
+      "name": "Click to start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "b2",
+      "name": "Settings (app + runs per agent)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "t1",
+              "name": "targetUrl",
+              "value": "https://mai-hakim.github.io/papershield/",
+              "type": "string"
+            },
+            {
+              "id": "t2",
+              "name": "runsPerAgent",
+              "value": 2,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b3",
+      "name": "AI agents explore (4 personas)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:3456/agents/run",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ url: $json.targetUrl, runs: $json.runsPerAgent }) }}",
+        "options": {
+          "timeout": 7200000
+        }
+      }
+    },
+    {
+      "id": "b4",
+      "name": "Fixed severity rules",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// STEP: Severity rules for agent findings — fixed rules, no AI.\n// Input:  data = { current, previous }   Output: result = same, with \"severity\" on every finding,\n// and the same finding found by several agents/runs merged into one row.\nconst RULES = {\n  'page-not-loading': 'serious', 'page-crash': 'serious', 'broken-link': 'serious', 'zoom-blocked': 'serious',\n  'lowvision-cut-off': 'serious', 'axe-color-contrast': 'serious',\n  'lowvision-horizontal-scroll': 'medium', 'small-font': 'medium', 'small-target': 'medium', 'tremor-wrong-tap': 'medium',\n  'dead-tap': 'medium', 'console-error': 'medium'\n};\nconst AXE_IMPACT = { critical: 'serious', serious: 'medium', moderate: 'minor', minor: 'minor' };\nconst severityOf = i => RULES[i.rule] || (i.rule.startsWith('axe-') ? (AXE_IMPACT[i.impact] || 'minor') : 'medium');\n\nfunction merge(run) {\n  if (!run || !run.issues) return run || null;\n  const byId = new Map();\n  for (const i of run.issues) {\n    const k = i.id;\n    if (!byId.has(k)) byId.set(k, { ...i, severity: severityOf(i), personas: [], runs: [], foundByAgentReport: false });\n    const m = byId.get(k);\n    const who = i.persona + ' #' + i.run;\n    if (!m.runs.includes(who)) m.runs.push(who);\n    if (!m.personas.includes(i.persona)) m.personas.push(i.persona);\n    if (i.foundBy === 'agent-report+check') { m.foundByAgentReport = true; m.agentNote = m.agentNote || i.agentNote; }\n    if (!m.aiDescription && i.aiDescription) m.aiDescription = i.aiDescription;\n  }\n  const order = { serious: 0, medium: 1, minor: 2 };\n  const issues = [...byId.values()].sort((a, b) => order[a.severity] - order[b.severity] || b.runs.length - a.runs.length);\n  return { ...run, rawFindings: run.issues.length, issues };\n}\nconst result = { current: merge(data.current), previous: merge(data.previous), rulesUsed: RULES };\n\nreturn [{ json: result }];"
+      }
+    },
+    {
+      "id": "b5",
+      "name": "Consistency between runs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// STEP: How consistent were the agents? — fixed maths, no AI.\n// Each agent ran at least twice. For each persona we compare its runs:\n//  - did both runs reach the goal (same outcome)?\n//  - overlap of confirmed findings between runs (Jaccard: shared / all, 100% = identical)\n//  - number of steps used\nconst cur = data.current;\nconst raw = cur.agents || [];\nconst personas = [...new Set(raw.map(a => a.persona))];\n// raw per-run finding ids (before merge) are rebuilt from the merged rows' \"runs\" lists\nconst idsFor = (persona, run) => new Set(cur.issues.filter(i => i.runs.includes(persona + ' #' + run)).map(i => i.id));\nconst pct = x => Math.round(x * 100);\nconst perPersona = personas.map(p => {\n  const runs = raw.filter(a => a.persona === p).sort((a, b) => a.run - b.run);\n  const sets = runs.map(r => idsFor(p, r.run));\n  let jac = null;\n  if (sets.length >= 2) {\n    const [a, b] = sets; const all = new Set([...a, ...b]); const both = [...a].filter(x => b.has(x)).length;\n    jac = all.size ? both / all.size : 1;\n  }\n  return {\n    persona: p, label: runs[0] && runs[0].personaLabel, task: runs[0] && runs[0].task,\n    runs: runs.map(r => ({ run: r.run, success: r.success, gaveUp: r.gaveUp, steps: r.steps.length, stuck: r.stuckEvents, replans: r.replans, answer: r.answer, findings: idsFor(p, r.run).size })),\n    sameOutcome: runs.length >= 2 ? runs.every(r => r.success === runs[0].success) : null,\n    findingOverlapPct: jac == null ? null : pct(jac),\n    stepsRange: runs.length ? [Math.min(...runs.map(r => r.steps.length)), Math.max(...runs.map(r => r.steps.length))] : null\n  };\n});\nconst withOverlap = perPersona.filter(p => p.findingOverlapPct != null);\nconst result = {\n  ...cur,\n  consistency: {\n    perPersona,\n    averageFindingOverlapPct: withOverlap.length ? Math.round(withOverlap.reduce((s, p) => s + p.findingOverlapPct, 0) / withOverlap.length) : null,\n    personasWithSameOutcome: perPersona.filter(p => p.sameOutcome).length,\n    personas: perPersona.length,\n    goalsReached: raw.filter(a => a.success).length, agentRuns: raw.length\n  },\n  totals: { serious: cur.issues.filter(i => i.severity === 'serious').length, medium: cur.issues.filter(i => i.severity === 'medium').length, minor: cur.issues.filter(i => i.severity === 'minor').length, all: cur.issues.length,\n    confirmedFromAgentReports: cur.issues.filter(i => i.foundByAgentReport).length, unconfirmedAgentReports: (cur.unconfirmed || []).length }\n};\n\nreturn [{ json: result }];"
+      }
+    },
+    {
+      "id": "b6",
+      "name": "Build HTML report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// STEP: Build the HTML report for the agent run — fixed template, no AI.\r\nconst r = data;\r\nconst esc = s => String(s == null ? '' : s).replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\r\nconst SEV = { serious: ['#B42318', 'Serious'], medium: ['#9A4A00', 'Medium'], minor: ['#3F565C', 'Minor'] };\r\nconst c = r.consistency, t = r.totals;\r\nconst rows = r.issues.map(i => `<tr><td><span class=\"pill\" style=\"--c:${SEV[i.severity][0]}\">${SEV[i.severity][1]}</span></td>\r\n  <td><b>${esc(i.rule)}</b><br><small>${esc(i.check || '')}</small></td><td>${esc(i.element)}<br><small>${esc(i.page)}</small></td>\r\n  <td>${esc(i.aiDescription || i.detail)}${i.aiDescription ? `<br><small>Rule fact: ${esc(i.detail)}</small>` : ''}${i.agentNote ? `<br><small>Agent said: “${esc(i.agentNote)}”</small>` : ''}</td>\r\n  <td>${esc(i.personas.join(', '))}<br><small>${i.runs.length} run(s)${i.foundByAgentReport ? ' · reported by agent + confirmed' : ' · found by check on agent path'}</small></td></tr>`).join('');\r\nconst agentRows = c.perPersona.map(p => `<tr><td><b>${esc(p.label)}</b><br><small>${esc(p.task)}</small></td>\r\n  ${p.runs.map(x => `<td>${x.success ? '✅ goal reached' : x.gaveUp ? '✋ gave up' : '⏱ ran out of steps'}<br><small>${x.steps} steps · stuck ${x.stuck}× · new plan ${x.replans}× · ${x.findings} findings</small>${x.answer ? `<br><small>“${esc(x.answer.slice(0, 160))}”</small>` : ''}</td>`).join('')}\r\n  <td>${p.sameOutcome == null ? '—' : p.sameOutcome ? 'same outcome' : '<b>different outcome</b>'}<br><small>finding overlap ${p.findingOverlapPct == null ? '—' : p.findingOverlapPct + '%'}</small></td></tr>`).join('');\r\nconst unconf = (r.unconfirmed || []).map(u => `<li><b>${esc(u.kind)}</b> — ${esc(u.persona)} #${u.run}, ${esc(u.element)}: “${esc(u.note)}” <small>(${esc(u.status)})</small></li>`).join('');\r\nconst steps = (r.agents || []).map(a => `<details><summary>${esc(a.personaLabel)} — run ${a.run}: ${a.success ? 'goal reached' : 'goal not reached'} in ${a.steps.length} steps</summary><ol>${a.steps.map(s =>\r\n  `<li><b>${esc(s.action)}</b>${s.elementLabel ? ' “' + esc(s.elementLabel) + '”' : ''}${s.text ? ' typed “' + esc(s.text) + '”' : ''} ${s.changed ? '' : '<i>(screen did not change)</i>'}${s.tremorMiss ? ' <i>(shaky tap missed)</i>' : ''}<br><small>Thinks: ${esc(s.plan)}</small></li>`).join('')}</ol></details>`).join('');\r\nconst html = `<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Agentic test report — ${esc(r.target)}</title>\r\n<style>body{font:16px/1.5 system-ui,Segoe UI,sans-serif;max-width:1100px;margin:0 auto;padding:16px;color:#0F2A30;background:#EEF3F6}h1,h2{color:#0F6B6B}table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}td,th{padding:8px;border-bottom:1px solid #CFDCE1;vertical-align:top;text-align:left}small{color:#3F565C}.pill{display:inline-block;padding:2px 10px;border-radius:99px;border:2px solid var(--c);color:var(--c);font-weight:700}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.card{background:#fff;border-radius:12px;padding:12px;border:1px solid #CFDCE1}.card b{font-size:1.6em;display:block}details{background:#fff;border-radius:10px;padding:8px 12px;margin:6px 0}.note{background:#DDF0EE;padding:10px 14px;border-radius:12px}</style></head><body>\r\n<h1>Agentic App Tester — report</h1>\r\n<p class=\"note\"><b>Agents explore, rules decide.</b> AI agents (Gemini, free tier) used the app as four simulated people. Every finding below was confirmed by a fixed check; severity comes from fixed rules in n8n. The AI only chose actions and wrote the descriptions.</p>\r\n<p><b>Target:</b> ${esc(r.target)} · <b>Run:</b> ${esc(r.runId)} · ${esc(r.environment && r.environment.browser)} · AI calls: ${r.ai ? r.ai.calls + ' (' + (r.ai.models || []).join(', ') + ')' : '—'}</p>\r\n<div class=\"cards\"><div class=\"card\"><b>${t.all}</b>confirmed findings</div><div class=\"card\"><b>${t.serious}</b>serious</div><div class=\"card\"><b>${t.medium}</b>medium</div><div class=\"card\"><b>${t.minor}</b>minor</div>\r\n<div class=\"card\"><b>${c.goalsReached} / ${c.agentRuns}</b>agent runs reached their goal</div><div class=\"card\"><b>${c.averageFindingOverlapPct == null ? '—' : c.averageFindingOverlapPct + '%'}</b>average finding overlap between runs</div><div class=\"card\"><b>${c.personasWithSameOutcome} / ${c.personas}</b>personas with the same outcome in every run</div></div>\r\n${r.ai && r.ai.reusedSavedRuns ? `<p class=\"note\">${r.ai.reusedSavedRuns} of ${(r.agents || []).length} agent runs were reused from runs saved earlier with the same tool version (the free AI quota had cut other runs short, so only those were run again).</p>` : ''}\r\n<h2>Agents and consistency (each agent ran ${r.settings.runsPerAgent}×)</h2><table><tr><th>Persona and goal</th>${Array.from({ length: r.settings.runsPerAgent }, (_, i) => `<th>Run ${i + 1}</th>`).join('')}<th>Consistency</th></tr>${agentRows}</table>\r\n<h2>Confirmed findings (${t.all})</h2><table><tr><th>Severity</th><th>Rule / check</th><th>Where</th><th>What it means</th><th>Found by</th></tr>${rows || '<tr><td colspan=5>No confirmed findings.</td></tr>'}</table>\r\n<h2>What agents reported that NO fixed check confirmed (${(r.unconfirmed || []).length}) — no severity</h2><ul>${unconf || '<li>None.</li>'}</ul>\r\n<h2>Every step the agents took</h2>${steps}\r\n${(r.harnessErrors || []).length ? '' : ''}<h2>Not checked</h2><ul>${(r.notChecked || []).map(x => '<li>' + esc(x) + '</li>').join('')}</ul>\r\n${(r.harnessErrors || []).length ? '<h2>Tool errors</h2><ul>' + r.harnessErrors.map(e => '<li>' + esc(e.stage) + ': ' + esc(e.message) + '</li>').join('') + '</ul>' : ''}\r\n<p><small>Generated by the n8n workflow \"Agentic App Tester\". Personas are simulations, not real users.</small></p></body></html>`;\r\nconst result = { html, runId: r.runId, target: r.target, totals: t, consistency: c };\r\n\nreturn [{ json: result }];"
+      }
+    },
+    {
+      "id": "b7",
+      "name": "Save report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:3456/agents/save-report",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ html: $json.html, runId: $json.runId, target: $json.target }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b8",
+      "name": "Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -280
+      ],
+      "parameters": {
+        "width": 900,
+        "height": 220,
+        "content": "## Agentic App Tester — Agents explore, rules decide\nAI agents (Gemini free tier) play 4 personas: low vision, hand tremor, first-time user, scam-anxious user. They look at the screen, decide where to tap, and change plan when stuck.\nEvery finding must be confirmed by a FIXED check (axe-core, tap size, spacing, font size, zoom, broken links, console errors, dead taps). Severity = fixed rules in \"Fixed severity rules\". AI never decides severity.\nNeeds: helper server running (`npm run server`) and GEMINI_API_KEY in test-harness/.env (not in this workflow)."
+      }
+    }
+  ],
+  "connections": {
+    "Click to start": {
+      "main": [
+        [
+          {
+            "node": "Settings (app + runs per agent)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings (app + runs per agent)": {
+      "main": [
+        [
+          {
+            "node": "AI agents explore (4 personas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI agents explore (4 personas)": {
+      "main": [
+        [
+          {
+            "node": "Fixed severity rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fixed severity rules": {
+      "main": [
+        [
+          {
+            "node": "Consistency between runs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consistency between runs": {
+      "main": [
+        [
+          {
+            "node": "Build HTML report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML report": {
+      "main": [
+        [
+          {
+            "node": "Save report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

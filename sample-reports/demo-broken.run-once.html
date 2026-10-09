@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test report — http://127.0.0.1:4321</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1f2430; --muted:#4a5263; --paper:#ffffff; --panel:#f2f4f7; --line:#d5dae2;
+          --serious:#a61b1b; --medium:#8a4b00; --minor:#2b5a86; --fixed:#1e6b34; --unknown:#5b5f6b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:18px/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Arial, sans-serif; }
+  main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: 2rem; line-height:1.2; margin:0 0 .4rem; }
+  h2 { font-size: 1.45rem; margin: 0 0 .25rem; }
+  .target { font-size:1.15rem; margin:0; word-break: break-all; }
+  .when { color:var(--muted); margin:.2rem 0 1.5rem; }
+  .summary { font-size:1.35rem; font-weight:700; margin: 0 0 .5rem; }
+  .changes-intro { margin: .5rem 0 .3rem; color:var(--muted); }
+  .changes { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; list-style:none; padding:0; margin:0 0 2rem; }
+  .changes li { font-size:1.1rem; } .changes .good strong { color:var(--fixed); }
+  .sev { border-left: 6px solid var(--line); padding: .25rem 0 .25rem 1.1rem; margin: 0 0 2.25rem; }
+  .sev-serious { border-color: var(--serious); } .sev-serious h2 { color: var(--serious); }
+  .sev-medium { border-color: var(--medium); } .sev-medium h2 { color: var(--medium); }
+  .sev-minor { border-color: var(--minor); } .sev-minor h2 { color: var(--minor); }
+  .sev-fixed { border-color: var(--fixed); } .sev-fixed h2 { color: var(--fixed); }
+  .sev-unknown { border-color: var(--unknown); }
+  .count { font-weight:400; color:var(--muted); }
+  .help { color:var(--muted); margin:0 0 .75rem; }
+  .issues { list-style:none; padding:0; margin:0; }
+  .issue { border-top:1px solid var(--line); padding: .8rem 0; }
+  .issue p { margin: .15rem 0; overflow-wrap:anywhere; }
+  .meta { color:var(--muted); font-size: .95rem; }
+  .status { display:inline-block; font-size:.85rem; font-weight:700; padding:.05rem .5rem; border-radius:4px; border:1.5px solid currentColor; margin-right:.35rem; }
+  .s-new { color: var(--serious); } .s-still { color: var(--muted); } .s-fixed { color: var(--fixed); } .s-not-retested { color: var(--unknown); }
+  .none { color:var(--muted); }
+  .table-wrap { overflow-x:auto; }
+  table { border-collapse: collapse; width:100%; font-size:1rem; }
+  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background: var(--panel); }
+  a { color: #1a4fa0; } a:focus-visible { outline:3px solid #1a4fa0; outline-offset:2px; }
+  .honest { background: var(--panel); padding: 1rem 1.25rem; border-radius: 6px; margin-top: 2.5rem; }
+  .honest h2 { font-size:1.25rem; } .honest h3 { font-size:1.05rem; margin:1rem 0 .25rem; }
+  footer { margin-top:2rem; color:var(--muted); font-size:.95rem; }
+</style></head>
+<body><main>
+  <h1>Accessibility and quality test report</h1>
+  <p class="target">http://127.0.0.1:4321</p>
+  <p class="when">Run on Oct 8, 2026, 1:29 PM · took 37 seconds · not logged in · Chromium 141.0.7390.37</p>
+  <p class="summary">33 problems found: 15 serious, 18 medium, 0 minor.</p>
+  <p class="changes-intro">This is the first run for this website, so there is nothing to compare with yet. Run it again after the team makes changes.</p>
+  <section class="sev sev-serious" aria-labelledby="h-serious">
+    <h2 id="h-serious">Serious <span class="count">(15)</span></h2>
+    <p class="help">Blocks or seriously harms the user. Fix first.</p>
+    <ul class="issues">
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Empty screen while loading</strong></p>
+    <p>The screen stayed empty for 3.6 seconds before any text appeared.</p>
+    <p class="meta">Item: page &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Zoom is blocked</strong></p>
+    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>
+    <p class="meta">Item: meta viewport &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Accessibility: color contrast</strong></p>
+    <p>Elements must meet minimum color contrast ratio thresholds — found on 3 element(s). Examples: h1 | .banner | p</p>
+    <p class="meta">Item: color-contrast &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href="https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright">How to fix</a></p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Zoom is blocked</strong></p>
+    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>
+    <p class="meta">Item: meta viewport &nbsp;|&nbsp; Where: /upload &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Accessibility: color contrast</strong></p>
+    <p>Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)</p>
+    <p class="meta">Item: color-contrast &nbsp;|&nbsp; Where: /upload &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href="https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright">How to fix</a></p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Zoom is blocked</strong></p>
+    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>
+    <p class="meta">Item: meta viewport &nbsp;|&nbsp; Where: /help &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Accessibility: color contrast</strong></p>
+    <p>Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)</p>
+    <p class="meta">Item: color-contrast &nbsp;|&nbsp; Where: /help &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href="https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright">How to fix</a></p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Zoom is blocked</strong></p>
+    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>
+    <p class="meta">Item: meta viewport &nbsp;|&nbsp; Where: /settings &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Accessibility: color contrast</strong></p>
+    <p>Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)</p>
+    <p class="meta">Item: color-contrast &nbsp;|&nbsp; Where: /settings &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href="https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright">How to fix</a></p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Page does not open</strong></p>
+    <p>The server answered with error 404.</p>
+    <p class="meta">Item: page &nbsp;|&nbsp; Where: /terms &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Zoom is blocked</strong></p>
+    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>
+    <p class="meta">Item: meta viewport &nbsp;|&nbsp; Where: /privacy &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Accessibility: color contrast</strong></p>
+    <p>Elements must meet minimum color contrast ratio thresholds — found on 1 element(s). Examples: h2</p>
+    <p class="meta">Item: color-contrast &nbsp;|&nbsp; Where: /privacy &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href="https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright">How to fix</a></p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Broken link</strong></p>
+    <p>Link is broken: server error 404.</p>
+    <p class="meta">Item: &quot;Terms&quot; → http://127.0.0.1:4321/terms &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Broken link</strong></p>
+    <p>Link is broken: the page opens but says &quot;not found&quot;.</p>
+    <p class="meta">Item: &quot;Privacy&quot; → http://127.0.0.1:4321/privacy &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Text runs off the screen at 200% zoom</strong></p>
+    <p>At 200% zoom, 1 piece(s) of text go off the edge of the screen. Examples: div &quot;Upload a bill or a letter and we explain&quot;</p>
+    <p class="meta">Item: text outside the screen &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li></ul>
+  </section><section class="sev sev-medium" aria-labelledby="h-medium">
+    <h2 id="h-medium">Medium <span class="count">(18)</span></h2>
+    <p class="help">Makes the app harder to use.</p>
+    <ul class="issues">
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Text too small</strong></p>
+    <p>8 piece(s) of text are smaller than 16px. Examples: 13px &quot;Upload a bill or a letter and &quot;; 13px &quot;Your documents stay private.&quot;; 13px &quot;Upload&quot;; 13px &quot;Help&quot;</p>
+    <p class="meta">Item: text under 16px &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Browser error message</strong></p>
+    <p>Browser console error: Failed to load appointments: 500</p>
+    <p class="meta">Item: Failed to load appointments: 500 &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Something failed to download</strong></p>
+    <p>A file or data request failed: HTTP 404 — http://127.0.0.1:4321/logo-missing.png</p>
+    <p class="meta">Item: HTTP 404 — http://127.0.0.1:4321/logo-missing.png &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Text too small</strong></p>
+    <p>2 piece(s) of text are smaller than 16px. Examples: 13px &quot;This is the upload page of the&quot;; 13px &quot;Back home&quot;</p>
+    <p class="meta">Item: text under 16px &nbsp;|&nbsp; Where: /upload &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Text too small</strong></p>
+    <p>2 piece(s) of text are smaller than 16px. Examples: 13px &quot;This is the help page of the d&quot;; 13px &quot;Back home&quot;</p>
+    <p class="meta">Item: text under 16px &nbsp;|&nbsp; Where: /help &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Text too small</strong></p>
+    <p>2 piece(s) of text are smaller than 16px. Examples: 13px &quot;This is the settings page of t&quot;; 13px &quot;Back home&quot;</p>
+    <p class="meta">Item: text under 16px &nbsp;|&nbsp; Where: /settings &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Sideways scrolling at 200% zoom</strong></p>
+    <p>At 200% zoom the page is 1048px wide on a 640px screen, so the reader must scroll sideways to read each line.</p>
+    <p class="meta">Item: whole page &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Upload&quot; (50×22px)</p>
+    <p class="meta">Item: a &quot;Upload&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Help&quot; (36×22px)</p>
+    <p class="meta">Item: a &quot;Help&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Settings&quot; (58×22px)</p>
+    <p class="meta">Item: a &quot;Settings&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Terms&quot; (35×16px)</p>
+    <p class="meta">Item: a &quot;Terms&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Privacy&quot; (42×16px)</p>
+    <p class="meta">Item: a &quot;Privacy&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Shaky tap hits the wrong control</strong></p>
+    <p>A shaky tap 8px off a &quot;Upload&quot; would hit a different control instead: a &quot;Help&quot;.</p>
+    <p class="meta">Item: a &quot;Upload&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Shaky tap hits the wrong control</strong></p>
+    <p>A shaky tap 8px off a &quot;Help&quot; would hit a different control instead: a &quot;Upload&quot;, a &quot;Settings&quot;.</p>
+    <p class="meta">Item: a &quot;Help&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Shaky tap hits the wrong control</strong></p>
+    <p>A shaky tap 8px off a &quot;Settings&quot; would hit a different control instead: a &quot;Help&quot;.</p>
+    <p class="meta">Item: a &quot;Settings&quot; &nbsp;|&nbsp; Where: Home page &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (66×16px)</p>
+    <p class="meta">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: /upload &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (66×16px)</p>
+    <p class="meta">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: /help &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-new">New</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (66×16px)</p>
+    <p class="meta">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: /settings &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li></ul>
+  </section><section class="sev sev-minor" aria-labelledby="h-minor">
+    <h2 id="h-minor">Minor <span class="count">(0)</span></h2>
+    <p class="help">Small polish problems.</p>
+    <p class="none">None.</p>
+  </section>
+  
+  
+  <section aria-labelledby="h-pages">
+    <h2 id="h-pages">Pages tested (6)</h2>
+    <p class="help">"First text" is how long the screen stayed empty. Screenshots open in the same folder as this report.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Page</th><th scope="col">Answer</th><th scope="col">First text</th><th scope="col">Fully loaded</th><th scope="col">Screenshots</th></tr></thead>
+      <tbody><tr>
+  <td>Home page</td><td>200</td>
+  <td>3.6 s</td><td>3.6 s</td>
+  <td><a href="screens/2026-10-08T20-29-25-181Z-home-desktop.png">Normal</a> · <a href="screens/2026-10-08T20-29-25-181Z-home-zoom200.png">200% zoom</a></td></tr><tr>
+  <td>/upload</td><td>200</td>
+  <td>0.0 s</td><td>0.0 s</td>
+  <td><a href="screens/2026-10-08T20-29-25-181Z-upload-desktop.png">Normal</a> · <a href="screens/2026-10-08T20-29-25-181Z-upload-zoom200.png">200% zoom</a></td></tr><tr>
+  <td>/help</td><td>200</td>
+  <td>0.1 s</td><td>0.1 s</td>
+  <td><a href="screens/2026-10-08T20-29-25-181Z-help-desktop.png">Normal</a> · <a href="screens/2026-10-08T20-29-25-181Z-help-zoom200.png">200% zoom</a></td></tr><tr>
+  <td>/settings</td><td>200</td>
+  <td>0.0 s</td><td>0.1 s</td>
+  <td><a href="screens/2026-10-08T20-29-25-181Z-settings-desktop.png">Normal</a> · <a href="screens/2026-10-08T20-29-25-181Z-settings-zoom200.png">200% zoom</a></td></tr><tr>
+  <td>/terms</td><td>404</td>
+  <td>0.0 s</td><td>0.0 s</td>
+  <td>—</td></tr><tr>
+  <td>/privacy</td><td>200</td>
+  <td>0.0 s</td><td>0.0 s</td>
+  <td><a href="screens/2026-10-08T20-29-25-181Z-privacy-desktop.png">Normal</a> · <a href="screens/2026-10-08T20-29-25-181Z-privacy-zoom200.png">200% zoom</a></td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="honest" aria-labelledby="h-honest">
+    <h2 id="h-honest">What this run did not check</h2>
+    <ul><li>Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.</li><li>Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.</li><li>Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.</li><li>Links that are buttons or JavaScript actions (not normal links) are not followed.</li><li>The low-vision and tremor personas are simulations. They do not replace testing with real older adults.</li></ul>
+    <p>Every planned check ran.</p>
+  </section>
+  <footer>Automated Multi-Persona Test Harness · fixed rules, no AI · run ID 2026-10-08T20-29-25-181Z</footer>
+</main></body></html>

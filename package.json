@@ -1,0 +1,17 @@
+{
+  "name": "multi-persona-test-harness",
+  "version": "1.0.0",
+  "description": "Automated Multi-Persona Test Harness - fixed rules, free tools, runs locally with n8n",
+  "main": "server.js",
+  "scripts": {
+    "setup": "npx playwright install chromium",
+    "test-once": "node run-once.js",
+    "server": "node server.js",
+    "save-login": "node save-login.js",
+    "demo-site": "node demo-site/serve.js"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "playwright": "1.56.0"
+  }
+}

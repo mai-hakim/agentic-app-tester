@@ -1,0 +1,211 @@
+{
+  "id": "multiPersonaHrn1",
+  "name": "Automated Multi-Persona Test Harness",
+  "active": false,
+  "nodes": [
+    {
+      "id": "a1",
+      "name": "Click to start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "a2",
+      "name": "Settings (website to test)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s1",
+              "name": "targetUrl",
+              "value": "http://127.0.0.1:4321",
+              "type": "string"
+            },
+            {
+              "id": "s2",
+              "name": "maxPages",
+              "value": 8,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "a3",
+      "name": "Run the tests",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:3456/run",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ url: $json.targetUrl, maxPages: $json.maxPages }) }}",
+        "options": {
+          "timeout": 900000
+        }
+      }
+    },
+    {
+      "id": "a4",
+      "name": "Severity rules",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// STEP: Severity rules (قواعد الخطورة) — fixed rules, no AI.\n// Input:  data = { current, previous }   Output: result = same, with \"severity\" on every issue.\n// To change a rule, edit the word next to it: 'serious' (خطير), 'medium' (متوسط), 'minor' (بسيط).\nconst RULES = {\n  'page-not-loading':            'serious', // page does not open\n  'page-crash':                  'serious', // JavaScript crashed\n  'broken-link':                 'serious', // link leads nowhere\n  'blank-screen':                'serious', // empty screen longer than the limit\n  'zoom-blocked':                'serious', // user cannot zoom (maximum-scale / user-scalable=no)\n  'lowvision-cut-off':           'serious', // text runs off the screen at 200%\n  'axe-color-contrast':          'serious', // text too faint — older users are the audience\n  'lowvision-horizontal-scroll': 'medium',\n  'lowvision-clipped':           'medium',\n  'small-font':                  'medium',\n  'small-target':                'medium',\n  'tremor-wrong-tap':            'medium',\n  'console-error':               'medium',\n  'failed-request':              'medium',\n  'slow-load':                   'medium'\n};\n// Any other accessibility (axe-core) rule: decided by how bad axe-core says it is.\nconst AXE_IMPACT = { critical: 'serious', serious: 'medium', moderate: 'minor', minor: 'minor' };\n\nfunction severityOf(i) {\n  if (RULES[i.rule]) return RULES[i.rule];\n  if (i.rule.startsWith('axe-')) return AXE_IMPACT[i.impact] || 'minor';\n  return 'medium';\n}\nfunction tag(run) {\n  if (!run || !run.issues) return run || null;\n  return { ...run, issues: run.issues.map(i => ({ ...i, severity: severityOf(i) })) };\n}\nconst result = { current: tag(data.current), previous: tag(data.previous), rulesUsed: RULES };\n\nreturn [{ json: result }];"
+      }
+    },
+    {
+      "id": "a5",
+      "name": "Compare with last run",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// STEP: Compare with the previous run (مقارنة بآخر تشغيل) — fixed rules.\n// Every issue gets a status: 'new' (جديدة), 'still' (لسه موجودة).\n// Issues from last time that are gone become 'fixed' (اتصلحت) — but ONLY if their page was tested again.\n// If the page was not tested this time, the issue is 'not-retested' (UNKNOWN), never \"fixed\".\nconst cur = data.current;\nconst prev = data.previous && data.previous.issues && data.previous.target === cur.target ? data.previous : null;\nconst key = u => { try { const x = new URL(u); return x.origin + x.pathname.replace(/\\/$/, ''); } catch (e) { return u; } };\nconst testedNow = new Set((cur.pagesTested || []).map(p => key(p.url)));\nconst prevIds = new Set(prev ? prev.issues.map(i => i.id) : []);\nconst curIds = new Set(cur.issues.map(i => i.id));\n\nconst issues = cur.issues.map(i => ({ ...i, status: prev ? (prevIds.has(i.id) ? 'still' : 'new') : 'new' }));\nconst gone = prev ? prev.issues.filter(i => !curIds.has(i.id)) : [];\nconst fixed = gone.filter(i => testedNow.has(key(i.page))).map(i => ({ ...i, status: 'fixed' }));\nconst notRetested = gone.filter(i => !testedNow.has(key(i.page))).map(i => ({ ...i, status: 'not-retested' }));\n\nconst count = (list, s) => list.filter(i => i.severity === s).length;\nconst result = {\n  ...cur,\n  issues,\n  fixed,\n  notRetested,\n  comparison: prev\n    ? { hasPrevious: true, previousRunId: prev.runId, previousAt: prev.startedAt,\n        new: issues.filter(i => i.status === 'new').length, still: issues.filter(i => i.status === 'still').length,\n        fixed: fixed.length, notRetested: notRetested.length }\n    : { hasPrevious: false },\n  totals: { serious: count(issues, 'serious'), medium: count(issues, 'medium'), minor: count(issues, 'minor'), all: issues.length }\n};\n\nreturn [{ json: result }];"
+      }
+    },
+    {
+      "id": "a6",
+      "name": "Build HTML report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// STEP: Build the HTML report (كتابة التقرير).\n// Input: data = output of the compare step. Output: result = { html, runId, target, totals, comparison }.\nconst r = data;\nconst esc = s => String(s == null ? '' : s).replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', \"'\": '&#39;' }[c]));\nconst shortPage = u => { try { const x = new URL(u); return x.pathname === '/' ? 'Home page' : x.pathname; } catch (e) { return u; } };\nconst when = iso => { try { return new Date(iso).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }); } catch (e) { return iso; } };\n\nconst PERSONA = { 'default': 'Every user', 'low-vision': 'Low vision (simulated)', 'tremor': 'Hand tremor (simulated)' };\nconst RULE_NAME = {\n  'page-not-loading': 'Page does not open', 'page-crash': 'Page code crashed', 'broken-link': 'Broken link',\n  'blank-screen': 'Empty screen while loading', 'slow-load': 'Slow page', 'zoom-blocked': 'Zoom is blocked',\n  'lowvision-cut-off': 'Text runs off the screen at 200% zoom', 'lowvision-clipped': 'Text hidden inside boxes at 200% zoom',\n  'lowvision-horizontal-scroll': 'Sideways scrolling at 200% zoom', 'small-font': 'Text too small',\n  'small-target': 'Tap area too small', 'tremor-wrong-tap': 'Shaky tap hits the wrong control',\n  'console-error': 'Browser error message', 'failed-request': 'Something failed to download'\n};\nconst ruleName = i => RULE_NAME[i.rule] || (i.rule.startsWith('axe-') ? 'Accessibility: ' + i.rule.slice(4).replace(/-/g, ' ') : i.rule);\nconst STATUS = { 'new': 'New', 'still': 'Still there', 'fixed': 'Fixed', 'not-retested': 'Not tested again' };\nconst SEV = [\n  ['serious', 'Serious', 'Blocks or seriously harms the user. Fix first.'],\n  ['medium', 'Medium', 'Makes the app harder to use.'],\n  ['minor', 'Minor', 'Small polish problems.']\n];\n\nconst t = r.totals, c = r.comparison;\nconst summary = t.all === 0\n  ? 'No problems were found by the checks that ran.'\n  : `${t.all} problem${t.all === 1 ? '' : 's'} found: ${t.serious} serious, ${t.medium} medium, ${t.minor} minor.`;\n\nconst changes = c.hasPrevious\n  ? `<p class=\"changes-intro\">Compared with the run on ${esc(when(c.previousAt))}:</p>\n     <ul class=\"changes\">\n       <li><strong>${c.new}</strong> new</li>\n       <li><strong>${c.still}</strong> still there</li>\n       <li class=\"good\"><strong>${c.fixed}</strong> fixed</li>\n       <li><strong>${c.notRetested}</strong> not tested again</li>\n     </ul>`\n  : `<p class=\"changes-intro\">This is the first run for this website, so there is nothing to compare with yet. Run it again after the team makes changes.</p>`;\n\nconst row = i => `\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-${esc(i.status)}\">${esc(STATUS[i.status] || i.status)}</span> <strong>${esc(ruleName(i))}</strong></p>\n    <p>${esc(i.detail)}</p>\n    <p class=\"meta\">Item: ${esc(i.element)} &nbsp;|&nbsp; Where: ${esc(shortPage(i.page))} &nbsp;|&nbsp; Who it affects: ${esc(PERSONA[i.persona] || i.persona)}${i.helpUrl ? ` &nbsp;|&nbsp; <a href=\"${esc(i.helpUrl)}\">How to fix</a>` : ''}</p>\n  </li>`;\n\nconst sections = SEV.map(([key, label, help]) => {\n  const list = r.issues.filter(i => i.severity === key)\n    .sort((a, b) => (a.status === 'new' ? -1 : 1) - (b.status === 'new' ? -1 : 1));\n  return `<section class=\"sev sev-${key}\" aria-labelledby=\"h-${key}\">\n    <h2 id=\"h-${key}\">${label} <span class=\"count\">(${list.length})</span></h2>\n    <p class=\"help\">${help}</p>\n    ${list.length ? `<ul class=\"issues\">${list.map(row).join('')}</ul>` : '<p class=\"none\">None.</p>'}\n  </section>`;\n}).join('');\n\nconst fixedBlock = r.fixed && r.fixed.length ? `<section class=\"sev sev-fixed\" aria-labelledby=\"h-fixed\">\n  <h2 id=\"h-fixed\">Fixed since last run <span class=\"count\">(${r.fixed.length})</span></h2>\n  <ul class=\"issues\">${r.fixed.map(row).join('')}</ul></section>` : '';\n\nconst notRetestedBlock = r.notRetested && r.notRetested.length ? `<section class=\"sev sev-unknown\" aria-labelledby=\"h-unk\">\n  <h2 id=\"h-unk\">Not tested again — status UNKNOWN <span class=\"count\">(${r.notRetested.length})</span></h2>\n  <p class=\"help\">These were found last time on pages this run did not reach. They are not marked fixed.</p>\n  <ul class=\"issues\">${r.notRetested.map(row).join('')}</ul></section>` : '';\n\nconst sec = ms => ms == null ? '—' : (ms / 1000).toFixed(1) + ' s';\nconst pages = (r.pagesTested || []).map(p => `<tr>\n  <td>${esc(shortPage(p.url))}</td><td>${p.status == null ? 'did not open' : esc(p.status)}</td>\n  <td>${sec(p.firstTextMs)}</td><td>${sec(p.loadMs)}</td>\n  <td>${p.screenshot ? `<a href=\"${esc(p.screenshot)}\">Normal</a>` : '—'}${p.zoomScreenshot ? ` · <a href=\"${esc(p.zoomScreenshot)}\">200% zoom</a>` : ''}</td></tr>`).join('');\n\nconst errors = (r.harnessErrors || []).length\n  ? `<h3>Checks that failed to run</h3><ul>${r.harnessErrors.map(e => `<li>${esc(e.stage)} on ${esc(shortPage(e.page))}: ${esc(e.message)}</li>`).join('')}</ul>`\n  : '<p>Every planned check ran.</p>';\n\nconst html = `<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Test report — ${esc(r.target)}</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap\" rel=\"stylesheet\">\n<style>\n  :root { --ink:#1f2430; --muted:#4a5263; --paper:#ffffff; --panel:#f2f4f7; --line:#d5dae2;\n          --serious:#a61b1b; --medium:#8a4b00; --minor:#2b5a86; --fixed:#1e6b34; --unknown:#5b5f6b; }\n  * { box-sizing:border-box; }\n  body { margin:0; background:var(--paper); color:var(--ink); font:18px/1.55 \"Atkinson Hyperlegible\", system-ui, -apple-system, \"Segoe UI\", Arial, sans-serif; }\n  main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }\n  h1 { font-size: 2rem; line-height:1.2; margin:0 0 .4rem; }\n  h2 { font-size: 1.45rem; margin: 0 0 .25rem; }\n  .target { font-size:1.15rem; margin:0; word-break: break-all; }\n  .when { color:var(--muted); margin:.2rem 0 1.5rem; }\n  .summary { font-size:1.35rem; font-weight:700; margin: 0 0 .5rem; }\n  .changes-intro { margin: .5rem 0 .3rem; color:var(--muted); }\n  .changes { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; list-style:none; padding:0; margin:0 0 2rem; }\n  .changes li { font-size:1.1rem; } .changes .good strong { color:var(--fixed); }\n  .sev { border-left: 6px solid var(--line); padding: .25rem 0 .25rem 1.1rem; margin: 0 0 2.25rem; }\n  .sev-serious { border-color: var(--serious); } .sev-serious h2 { color: var(--serious); }\n  .sev-medium { border-color: var(--medium); } .sev-medium h2 { color: var(--medium); }\n  .sev-minor { border-color: var(--minor); } .sev-minor h2 { color: var(--minor); }\n  .sev-fixed { border-color: var(--fixed); } .sev-fixed h2 { color: var(--fixed); }\n  .sev-unknown { border-color: var(--unknown); }\n  .count { font-weight:400; color:var(--muted); }\n  .help { color:var(--muted); margin:0 0 .75rem; }\n  .issues { list-style:none; padding:0; margin:0; }\n  .issue { border-top:1px solid var(--line); padding: .8rem 0; }\n  .issue p { margin: .15rem 0; overflow-wrap:anywhere; }\n  .meta { color:var(--muted); font-size: .95rem; }\n  .status { display:inline-block; font-size:.85rem; font-weight:700; padding:.05rem .5rem; border-radius:4px; border:1.5px solid currentColor; margin-right:.35rem; }\n  .s-new { color: var(--serious); } .s-still { color: var(--muted); } .s-fixed { color: var(--fixed); } .s-not-retested { color: var(--unknown); }\n  .none { color:var(--muted); }\n  .table-wrap { overflow-x:auto; }\n  table { border-collapse: collapse; width:100%; font-size:1rem; }\n  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }\n  th { background: var(--panel); }\n  a { color: #1a4fa0; } a:focus-visible { outline:3px solid #1a4fa0; outline-offset:2px; }\n  .honest { background: var(--panel); padding: 1rem 1.25rem; border-radius: 6px; margin-top: 2.5rem; }\n  .honest h2 { font-size:1.25rem; } .honest h3 { font-size:1.05rem; margin:1rem 0 .25rem; }\n  footer { margin-top:2rem; color:var(--muted); font-size:.95rem; }\n</style></head>\n<body><main>\n  <h1>Accessibility and quality test report</h1>\n  <p class=\"target\">${esc(r.target)}</p>\n  <p class=\"when\">Run on ${esc(when(r.startedAt))} · took ${Math.round((r.durationMs || 0) / 1000)} seconds · ${r.environment && r.environment.loggedIn ? 'logged in' : 'not logged in'} · ${esc(r.environment && r.environment.browser)}</p>\n  <p class=\"summary\">${esc(summary)}</p>\n  ${changes}\n  ${sections}\n  ${fixedBlock}\n  ${notRetestedBlock}\n  <section aria-labelledby=\"h-pages\">\n    <h2 id=\"h-pages\">Pages tested (${(r.pagesTested || []).length})</h2>\n    <p class=\"help\">\"First text\" is how long the screen stayed empty. Screenshots open in the same folder as this report.</p>\n    <div class=\"table-wrap\"><table>\n      <thead><tr><th scope=\"col\">Page</th><th scope=\"col\">Answer</th><th scope=\"col\">First text</th><th scope=\"col\">Fully loaded</th><th scope=\"col\">Screenshots</th></tr></thead>\n      <tbody>${pages || '<tr><td colspan=\"5\">No pages could be opened.</td></tr>'}</tbody>\n    </table></div>\n  </section>\n  <section class=\"honest\" aria-labelledby=\"h-honest\">\n    <h2 id=\"h-honest\">What this run did not check</h2>\n    <ul>${(r.notChecked || []).map(n => `<li>${esc(n)}</li>`).join('')}</ul>\n    ${errors}\n  </section>\n  <footer>Automated Multi-Persona Test Harness · fixed rules, no AI · run ID ${esc(r.runId)}</footer>\n</main></body></html>`;\n\nconst result = { html, runId: r.runId, target: r.target, totals: r.totals, comparison: r.comparison };\n\nreturn [{ json: result }];"
+      }
+    },
+    {
+      "id": "a7",
+      "name": "Save report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:3456/save-report",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ html: $json.html, runId: $json.runId, target: $json.target }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "a8",
+      "name": "Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -260
+      ],
+      "parameters": {
+        "width": 760,
+        "height": 200,
+        "content": "## Automated Multi-Persona Test Harness\nBefore clicking **Test workflow**: the helper server must be running (`npm run server`).\nTo test another website, open **Settings** and change `targetUrl`.\nWhen it finishes, open http://127.0.0.1:3456/report\nFixed rules only. No AI. The low-vision and tremor personas are simulations."
+      }
+    }
+  ],
+  "connections": {
+    "Click to start": {
+      "main": [
+        [
+          {
+            "node": "Settings (website to test)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings (website to test)": {
+      "main": [
+        [
+          {
+            "node": "Run the tests",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run the tests": {
+      "main": [
+        [
+          {
+            "node": "Severity rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Severity rules": {
+      "main": [
+        [
+          {
+            "node": "Compare with last run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare with last run": {
+      "main": [
+        [
+          {
+            "node": "Build HTML report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML report": {
+      "main": [
+        [
+          {
+            "node": "Save report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}

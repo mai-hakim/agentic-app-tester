@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Verdana, sans-serif" font-size="15">
+  <title>Agentic App Tester — Agents explore, rules decide</title>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0F6B6B"/></marker></defs>
+  <rect width="1000" height="620" fill="#ffffff"/>
+  <text x="500" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#0F2A30">Agents explore, rules decide</text>
+  <!-- n8n lane -->
+  <rect x="20" y="60" width="960" height="120" rx="16" fill="#FDF3E7" stroke="#EA8A2E" stroke-width="2"/>
+  <text x="36" y="84" font-weight="bold" fill="#B5560B">n8n workflow (on the laptop)</text>
+  <g font-size="13" text-anchor="middle" fill="#0F2A30">
+    <rect x="40" y="100" width="120" height="56" rx="10" fill="#fff" stroke="#EA8A2E" stroke-width="2"/><text x="100" y="124">Start +</text><text x="100" y="142">target app URL</text>
+    <rect x="200" y="100" width="150" height="56" rx="10" fill="#fff" stroke="#EA8A2E" stroke-width="2"/><text x="275" y="124">Call helper:</text><text x="275" y="142">run 4 agents × 2</text>
+    <rect x="560" y="100" width="130" height="56" rx="10" fill="#fff" stroke="#B42318" stroke-width="3"/><text x="625" y="124" font-weight="bold">Fixed severity</text><text x="625" y="142">rules</text>
+    <rect x="710" y="100" width="120" height="56" rx="10" fill="#fff" stroke="#EA8A2E" stroke-width="2"/><text x="770" y="124">Consistency</text><text x="770" y="142">run 1 vs run 2</text>
+    <rect x="850" y="100" width="115" height="56" rx="10" fill="#fff" stroke="#EA8A2E" stroke-width="2"/><text x="907" y="124">HTML report</text><text x="907" y="142">saved</text>
+  </g>
+  <path d="M160 128H198" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/><path d="M350 128 H380 V198" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/>
+  <path d="M690 128H708" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/><path d="M830 128H848" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/>
+  <!-- agents lane -->
+  <rect x="20" y="200" width="620" height="400" rx="16" fill="#EEF3F6" stroke="#0F6B6B" stroke-width="2"/>
+  <text x="36" y="226" font-weight="bold" fill="#0F6B6B">Helper server: AI agents in a real browser (Playwright)</text>
+  <g font-size="13" fill="#0F2A30">
+    <rect x="40" y="244" width="140" height="44" rx="22" fill="#fff" stroke="#6A3FA0" stroke-width="2"/><text x="110" y="271" text-anchor="middle">👁 Low vision 200%</text>
+    <rect x="190" y="244" width="140" height="44" rx="22" fill="#fff" stroke="#6A3FA0" stroke-width="2"/><text x="260" y="271" text-anchor="middle">✋ Hand tremor</text>
+    <rect x="340" y="244" width="140" height="44" rx="22" fill="#fff" stroke="#6A3FA0" stroke-width="2"/><text x="410" y="271" text-anchor="middle">🌱 First-time user</text>
+    <rect x="490" y="244" width="140" height="44" rx="22" fill="#fff" stroke="#6A3FA0" stroke-width="2"/><text x="560" y="271" text-anchor="middle">🛡 Scam-anxious</text>
+  </g>
+  <g font-size="14" text-anchor="middle" fill="#0F2A30">
+    <rect x="60" y="320" width="160" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="140" y="348" font-weight="bold">1. Look</text><text x="140" y="370" font-size="12">screenshot + list of taps</text>
+    <rect x="250" y="320" width="160" height="70" rx="12" fill="#fff" stroke="#6A3FA0" stroke-width="3"/><text x="330" y="348" font-weight="bold">2. AI decides</text><text x="330" y="370" font-size="12">Gemini: next tap, plan</text>
+    <rect x="440" y="320" width="160" height="70" rx="12" fill="#fff" stroke="#0F6B6B" stroke-width="2"/><text x="520" y="348" font-weight="bold">3. Act</text><text x="520" y="370" font-size="12">tap / type / scroll / back</text>
+    <path d="M220 355H248" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/><path d="M410 355H438" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/>
+    <path d="M520 390 V420 H140 V392" fill="none" stroke="#0F6B6B" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+    <text x="330" y="438" font-size="11.5" fill="#3F565C">up to 12 steps · stuck (screen did not change)? → told to make a new plan</text>
+    <rect x="60" y="460" width="540" height="120" rx="12" fill="#fff" stroke="#B42318" stroke-width="3"/>
+    <text x="330" y="488" font-weight="bold" fill="#B42318">Fixed checks confirm every finding (no AI)</text>
+    <text x="330" y="514" font-size="12.5">axe-core WCAG A/AA · colour contrast · tap size ≥ 44 px · spacing ≥ 8 px</text>
+    <text x="330" y="536" font-size="12.5">font ≥ 16 px · zoom allowed · no sideways scroll at 200% · broken links</text>
+    <text x="330" y="558" font-size="12.5">console errors · a tap that changed nothing · a shaky tap that hit the wrong thing</text>
+  </g>
+  <path d="M600 520 H655 V172 H625 V159" fill="none" stroke="#0F6B6B" stroke-width="2.5" marker-end="url(#a)"/>
+  <!-- legend -->
+  <g font-size="13" fill="#0F2A30">
+    <rect x="670" y="220" width="310" height="380" rx="16" fill="#fff" stroke="#CFDCE1" stroke-width="2"/>
+    <text x="690" y="250" font-weight="bold">Who does what</text>
+    <rect x="690" y="268" width="18" height="18" rx="4" fill="#fff" stroke="#6A3FA0" stroke-width="3"/><text x="718" y="282">AI: explores and writes</text><text x="718" y="300">plain descriptions only</text>
+    <rect x="690" y="318" width="18" height="18" rx="4" fill="#fff" stroke="#B42318" stroke-width="3"/><text x="718" y="332">Fixed rules: decide if a</text><text x="718" y="350">problem is real and how serious</text>
+    <text x="690" y="390">What an agent "feels" but no</text><text x="690" y="408">check confirms is listed as</text><text x="690" y="426" font-weight="bold">"unconfirmed", with no severity.</text>
+    <text x="690" y="466">Each agent runs twice; the report</text><text x="690" y="484">shows how consistent the runs were.</text>
+    <text x="690" y="524" fill="#3F565C">Personas are simulations.</text><text x="690" y="542" fill="#3F565C">They do not replace testing</text><text x="690" y="560" fill="#3F565C">with real people.</text>
+  </g>
+</svg>

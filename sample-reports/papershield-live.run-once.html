@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test report — https://mai-hakim.github.io/papershield/</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1f2430; --muted:#4a5263; --paper:#ffffff; --panel:#f2f4f7; --line:#d5dae2;
+          --serious:#a61b1b; --medium:#8a4b00; --minor:#2b5a86; --fixed:#1e6b34; --unknown:#5b5f6b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:18px/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Arial, sans-serif; }
+  main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: 2rem; line-height:1.2; margin:0 0 .4rem; }
+  h2 { font-size: 1.45rem; margin: 0 0 .25rem; }
+  .target { font-size:1.15rem; margin:0; word-break: break-all; }
+  .when { color:var(--muted); margin:.2rem 0 1.5rem; }
+  .summary { font-size:1.35rem; font-weight:700; margin: 0 0 .5rem; }
+  .changes-intro { margin: .5rem 0 .3rem; color:var(--muted); }
+  .changes { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; list-style:none; padding:0; margin:0 0 2rem; }
+  .changes li { font-size:1.1rem; } .changes .good strong { color:var(--fixed); }
+  .sev { border-left: 6px solid var(--line); padding: .25rem 0 .25rem 1.1rem; margin: 0 0 2.25rem; }
+  .sev-serious { border-color: var(--serious); } .sev-serious h2 { color: var(--serious); }
+  .sev-medium { border-color: var(--medium); } .sev-medium h2 { color: var(--medium); }
+  .sev-minor { border-color: var(--minor); } .sev-minor h2 { color: var(--minor); }
+  .sev-fixed { border-color: var(--fixed); } .sev-fixed h2 { color: var(--fixed); }
+  .sev-unknown { border-color: var(--unknown); }
+  .count { font-weight:400; color:var(--muted); }
+  .help { color:var(--muted); margin:0 0 .75rem; }
+  .issues { list-style:none; padding:0; margin:0; }
+  .issue { border-top:1px solid var(--line); padding: .8rem 0; }
+  .issue p { margin: .15rem 0; overflow-wrap:anywhere; }
+  .meta { color:var(--muted); font-size: .95rem; }
+  .status { display:inline-block; font-size:.85rem; font-weight:700; padding:.05rem .5rem; border-radius:4px; border:1.5px solid currentColor; margin-right:.35rem; }
+  .s-new { color: var(--serious); } .s-still { color: var(--muted); } .s-fixed { color: var(--fixed); } .s-not-retested { color: var(--unknown); }
+  .none { color:var(--muted); }
+  .table-wrap { overflow-x:auto; }
+  table { border-collapse: collapse; width:100%; font-size:1rem; }
+  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background: var(--panel); }
+  a { color: #1a4fa0; } a:focus-visible { outline:3px solid #1a4fa0; outline-offset:2px; }
+  .honest { background: var(--panel); padding: 1rem 1.25rem; border-radius: 6px; margin-top: 2.5rem; }
+  .honest h2 { font-size:1.25rem; } .honest h3 { font-size:1.05rem; margin:1rem 0 .25rem; }
+  footer { margin-top:2rem; color:var(--muted); font-size:.95rem; }
+</style></head>
+<body><main>
+  <h1>Accessibility and quality test report</h1>
+  <p class="target">https://mai-hakim.github.io/papershield/</p>
+  <p class="when">Run on Oct 8, 2026, 1:31 PM · took 11 seconds · not logged in · Chromium 141.0.7390.37</p>
+  <p class="summary">No problems were found by the checks that ran.</p>
+  <p class="changes-intro">Compared with the run on Oct 8, 2026, 1:31 PM:</p>
+     <ul class="changes">
+       <li><strong>0</strong> new</li>
+       <li><strong>0</strong> still there</li>
+       <li class="good"><strong>4</strong> fixed</li>
+       <li><strong>0</strong> not tested again</li>
+     </ul>
+  <section class="sev sev-serious" aria-labelledby="h-serious">
+    <h2 id="h-serious">Serious <span class="count">(0)</span></h2>
+    <p class="help">Blocks or seriously harms the user. Fix first.</p>
+    <p class="none">None.</p>
+  </section><section class="sev sev-medium" aria-labelledby="h-medium">
+    <h2 id="h-medium">Medium <span class="count">(0)</span></h2>
+    <p class="help">Makes the app harder to use.</p>
+    <p class="none">None.</p>
+  </section><section class="sev sev-minor" aria-labelledby="h-minor">
+    <h2 id="h-minor">Minor <span class="count">(0)</span></h2>
+    <p class="help">Small polish problems.</p>
+    <p class="none">None.</p>
+  </section>
+  <section class="sev sev-fixed" aria-labelledby="h-fixed">
+  <h2 id="h-fixed">Fixed since last run <span class="count">(4)</span></h2>
+  <ul class="issues">
+  <li class="issue">
+    <p class="issue-head"><span class="status s-fixed">Fixed</span> <strong>Empty screen while loading</strong></p>
+    <p>The screen stayed empty for 5.0 seconds before any text appeared.</p>
+    <p class="meta">Item: page &nbsp;|&nbsp; Where: /papershield/ &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-fixed">Fixed</span> <strong>Slow page</strong></p>
+    <p>The page took 6.9 seconds to finish loading.</p>
+    <p class="meta">Item: page &nbsp;|&nbsp; Where: /papershield/ &nbsp;|&nbsp; Who it affects: Every user</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-fixed">Fixed</span> <strong>Text hidden inside boxes at 200% zoom</strong></p>
+    <p>At 200% zoom, 1 box(es) hide part of their text. Examples: a &quot;Skip to content&quot;</p>
+    <p class="meta">Item: text cut inside boxes &nbsp;|&nbsp; Where: /papershield/ &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>
+  </li>
+  <li class="issue">
+    <p class="issue-head"><span class="status s-fixed">Fixed</span> <strong>Tap area too small</strong></p>
+    <p>Tap area is smaller than 44×44px: a &quot;Skip to content&quot; (1×1px)</p>
+    <p class="meta">Item: a &quot;Skip to content&quot; &nbsp;|&nbsp; Where: /papershield/ &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>
+  </li></ul></section>
+  
+  <section aria-labelledby="h-pages">
+    <h2 id="h-pages">Pages tested (1)</h2>
+    <p class="help">"First text" is how long the screen stayed empty. Screenshots open in the same folder as this report.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th scope="col">Page</th><th scope="col">Answer</th><th scope="col">First text</th><th scope="col">Fully loaded</th><th scope="col">Screenshots</th></tr></thead>
+      <tbody><tr>
+  <td>/papershield/</td><td>200</td>
+  <td>0.2 s</td><td>1.6 s</td>
+  <td><a href="screens/2026-10-08T20-31-50-658Z-papershield-desktop.png">Normal</a> · <a href="screens/2026-10-08T20-31-50-658Z-papershield-zoom200.png">200% zoom</a></td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="honest" aria-labelledby="h-honest">
+    <h2 id="h-honest">What this run did not check</h2>
+    <ul><li>Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.</li><li>Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.</li><li>Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.</li><li>Links that are buttons or JavaScript actions (not normal links) are not followed.</li><li>The low-vision and tremor personas are simulations. They do not replace testing with real older adults.</li></ul>
+    <p>Every planned check ran.</p>
+  </section>
+  <footer>Automated Multi-Persona Test Harness · fixed rules, no AI · run ID 2026-10-08T20-31-50-658Z</footer>
+</main></body></html>

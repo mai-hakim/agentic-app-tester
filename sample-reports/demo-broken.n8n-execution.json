@@ -1,0 +1,1750 @@
+{
+ "data": {
+  "version": 1,
+  "startData": {},
+  "resultData": {
+   "runData": {
+    "Click to start": [
+     {
+      "startTime": 1791492993109,
+      "executionIndex": 0,
+      "source": [],
+      "hints": [],
+      "executionTime": 2,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {},
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ],
+    "Settings (website to test)": [
+     {
+      "startTime": 1791492993113,
+      "executionIndex": 1,
+      "source": [
+       {
+        "previousNode": "Click to start",
+        "previousNodeOutput": 0,
+        "previousNodeRun": 0
+       }
+      ],
+      "hints": [],
+      "executionTime": 6,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {
+           "targetUrl": "http://127.0.0.1:4321",
+           "maxPages": 8
+          },
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ],
+    "Run the tests": [
+     {
+      "startTime": 1791492993120,
+      "executionIndex": 2,
+      "source": [
+       {
+        "previousNode": "Settings (website to test)",
+        "previousNodeOutput": 0,
+        "previousNodeRun": 0
+       }
+      ],
+      "hints": [],
+      "executionTime": 36785,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {
+           "current": {
+            "tool": "Automated Multi-Persona Test Harness",
+            "runId": "2026-10-08T20-56-33-281Z",
+            "target": "http://127.0.0.1:4321",
+            "startedAt": "2026-10-08T20:56:33.281Z",
+            "settings": {
+             "maxPages": 8,
+             "minFontPx": 16,
+             "minTargetPx": 44,
+             "blankScreenLimitMs": 3000
+            },
+            "environment": {
+             "loggedIn": false,
+             "browser": "Chromium 141.0.7390.37"
+            },
+            "pagesTested": [
+             {
+              "url": "http://127.0.0.1:4321",
+              "status": 200,
+              "firstTextMs": 3594,
+              "loadMs": 3595,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-home-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-home-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/upload",
+              "status": 200,
+              "firstTextMs": 55,
+              "loadMs": 56,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-upload-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-upload-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/help",
+              "status": 200,
+              "firstTextMs": 60,
+              "loadMs": 61,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-help-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-help-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/settings",
+              "status": 200,
+              "firstTextMs": 46,
+              "loadMs": 47,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-settings-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-settings-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/terms",
+              "status": 404,
+              "firstTextMs": 37,
+              "loadMs": 37,
+              "screenshot": null
+             },
+             {
+              "url": "http://127.0.0.1:4321/privacy",
+              "status": 200,
+              "firstTextMs": 32,
+              "loadMs": 32,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-privacy-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-privacy-zoom200.png"
+             }
+            ],
+            "issues": [
+             {
+              "id": "blank-screen|http://127.0.0.1:4321|page",
+              "rule": "blank-screen",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "page",
+              "detail": "The screen stayed empty for 3.6 seconds before any text appeared.",
+              "value": 3594
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones."
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 3 element(s). Examples: h1 | .banner | p",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "text under 16px",
+              "detail": "8 piece(s) of text are smaller than 16px. Examples: 13px \"Upload a bill or a letter and \"; 13px \"Your documents stay private.\"; 13px \"Upload\"; 13px \"Help\"",
+              "value": 8
+             },
+             {
+              "id": "console-error|http://127.0.0.1:4321|Failed to load appointments: 500",
+              "rule": "console-error",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "Failed to load appointments: 500",
+              "detail": "Browser console error: Failed to load appointments: 500"
+             },
+             {
+              "id": "failed-request|http://127.0.0.1:4321|HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+              "rule": "failed-request",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+              "detail": "A file or data request failed: HTTP 404 — http://127.0.0.1:4321/logo-missing.png"
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/upload|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones."
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/upload|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321/upload|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "text under 16px",
+              "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the upload page of the\"; 13px \"Back home\"",
+              "value": 2
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/help|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones."
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/help|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321/help|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "text under 16px",
+              "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the help page of the d\"; 13px \"Back home\"",
+              "value": 2
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/settings|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones."
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/settings|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321/settings|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "text under 16px",
+              "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the settings page of t\"; 13px \"Back home\"",
+              "value": 2
+             },
+             {
+              "id": "page-not-loading|http://127.0.0.1:4321/terms|page",
+              "rule": "page-not-loading",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/terms",
+              "element": "page",
+              "detail": "The server answered with error 404."
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/privacy|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/privacy",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones."
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/privacy|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/privacy",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 1 element(s). Examples: h2",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright"
+             },
+             {
+              "id": "broken-link|http://127.0.0.1:4321|\"Terms\" → http://127.0.0.1:4321/terms",
+              "rule": "broken-link",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "\"Terms\" → http://127.0.0.1:4321/terms",
+              "detail": "Link is broken: server error 404."
+             },
+             {
+              "id": "broken-link|http://127.0.0.1:4321|\"Privacy\" → http://127.0.0.1:4321/privacy",
+              "rule": "broken-link",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "\"Privacy\" → http://127.0.0.1:4321/privacy",
+              "detail": "Link is broken: the page opens but says \"not found\"."
+             },
+             {
+              "id": "lowvision-horizontal-scroll|http://127.0.0.1:4321|whole page",
+              "rule": "lowvision-horizontal-scroll",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321",
+              "element": "whole page",
+              "detail": "At 200% zoom the page is 1048px wide on a 640px screen, so the reader must scroll sideways to read each line."
+             },
+             {
+              "id": "lowvision-cut-off|http://127.0.0.1:4321|text outside the screen",
+              "rule": "lowvision-cut-off",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321",
+              "element": "text outside the screen",
+              "detail": "At 200% zoom, 1 piece(s) of text go off the edge of the screen. Examples: div \"Upload a bill or a letter and we explain\"",
+              "value": 1
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Upload\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Upload\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Upload\" (50×22px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Help\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Help\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Help\" (36×22px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Settings\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Settings\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Settings\" (58×22px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Terms\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Terms\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Terms\" (35×16px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Privacy\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Privacy\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Privacy\" (42×16px)"
+             },
+             {
+              "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Upload\"",
+              "rule": "tremor-wrong-tap",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Upload\"",
+              "detail": "A shaky tap 8px off a \"Upload\" would hit a different control instead: a \"Help\"."
+             },
+             {
+              "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Help\"",
+              "rule": "tremor-wrong-tap",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Help\"",
+              "detail": "A shaky tap 8px off a \"Help\" would hit a different control instead: a \"Upload\", a \"Settings\"."
+             },
+             {
+              "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Settings\"",
+              "rule": "tremor-wrong-tap",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Settings\"",
+              "detail": "A shaky tap 8px off a \"Settings\" would hit a different control instead: a \"Help\"."
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/upload|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/help|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/settings|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)"
+             }
+            ],
+            "notChecked": [
+             "Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.",
+             "Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.",
+             "Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.",
+             "Links that are buttons or JavaScript actions (not normal links) are not followed.",
+             "The low-vision and tremor personas are simulations. They do not replace testing with real older adults."
+            ],
+            "harnessErrors": [],
+            "finishedAt": "2026-10-08T20:57:09.848Z",
+            "durationMs": 36567
+           },
+           "previous": {
+            "tool": "Automated Multi-Persona Test Harness",
+            "runId": "2026-10-08T20-30-21-734Z",
+            "target": "http://127.0.0.1:4321",
+            "startedAt": "2026-10-08T20:30:21.736Z",
+            "settings": {
+             "maxPages": 8,
+             "minFontPx": 16,
+             "minTargetPx": 44,
+             "blankScreenLimitMs": 3000
+            },
+            "environment": {
+             "loggedIn": false,
+             "browser": "Chromium 141.0.7390.37"
+            },
+            "pagesTested": [
+             {
+              "url": "http://127.0.0.1:4321",
+              "status": 200,
+              "firstTextMs": 276,
+              "loadMs": 278,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-home-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-home-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/upload",
+              "status": 200,
+              "firstTextMs": 46,
+              "loadMs": 47,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-upload-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-upload-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/help",
+              "status": 200,
+              "firstTextMs": 44,
+              "loadMs": 45,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-help-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-help-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/settings",
+              "status": 200,
+              "firstTextMs": 50,
+              "loadMs": 51,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-settings-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-settings-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/terms",
+              "status": 200,
+              "firstTextMs": 45,
+              "loadMs": 46,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-terms-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-terms-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/privacy",
+              "status": 200,
+              "firstTextMs": 49,
+              "loadMs": 49,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-privacy-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-privacy-zoom200.png"
+             }
+            ],
+            "issues": [
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Terms\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Terms\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Terms\" (49×21px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Privacy\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Privacy\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Privacy\" (59×21px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/upload|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/help|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/settings|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/terms|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/terms",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/privacy|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/privacy",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)"
+             }
+            ],
+            "notChecked": [
+             "Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.",
+             "Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.",
+             "Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.",
+             "Links that are buttons or JavaScript actions (not normal links) are not followed.",
+             "The low-vision and tremor personas are simulations. They do not replace testing with real older adults."
+            ],
+            "harnessErrors": [],
+            "finishedAt": "2026-10-08T20:30:53.150Z",
+            "durationMs": 31414
+           }
+          },
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ],
+    "Severity rules": [
+     {
+      "startTime": 1791493029905,
+      "executionIndex": 3,
+      "source": [
+       {
+        "previousNode": "Run the tests",
+        "previousNodeOutput": 0,
+        "previousNodeRun": 0
+       }
+      ],
+      "hints": [],
+      "executionTime": 117,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {
+           "current": {
+            "tool": "Automated Multi-Persona Test Harness",
+            "runId": "2026-10-08T20-56-33-281Z",
+            "target": "http://127.0.0.1:4321",
+            "startedAt": "2026-10-08T20:56:33.281Z",
+            "settings": {
+             "maxPages": 8,
+             "minFontPx": 16,
+             "minTargetPx": 44,
+             "blankScreenLimitMs": 3000
+            },
+            "environment": {
+             "loggedIn": false,
+             "browser": "Chromium 141.0.7390.37"
+            },
+            "pagesTested": [
+             {
+              "url": "http://127.0.0.1:4321",
+              "status": 200,
+              "firstTextMs": 3594,
+              "loadMs": 3595,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-home-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-home-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/upload",
+              "status": 200,
+              "firstTextMs": 55,
+              "loadMs": 56,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-upload-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-upload-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/help",
+              "status": 200,
+              "firstTextMs": 60,
+              "loadMs": 61,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-help-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-help-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/settings",
+              "status": 200,
+              "firstTextMs": 46,
+              "loadMs": 47,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-settings-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-settings-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/terms",
+              "status": 404,
+              "firstTextMs": 37,
+              "loadMs": 37,
+              "screenshot": null
+             },
+             {
+              "url": "http://127.0.0.1:4321/privacy",
+              "status": 200,
+              "firstTextMs": 32,
+              "loadMs": 32,
+              "screenshot": "screens/2026-10-08T20-56-33-281Z-privacy-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-privacy-zoom200.png"
+             }
+            ],
+            "issues": [
+             {
+              "id": "blank-screen|http://127.0.0.1:4321|page",
+              "rule": "blank-screen",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "page",
+              "detail": "The screen stayed empty for 3.6 seconds before any text appeared.",
+              "value": 3594,
+              "severity": "serious"
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+              "severity": "serious"
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 3 element(s). Examples: h1 | .banner | p",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+              "severity": "serious"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "text under 16px",
+              "detail": "8 piece(s) of text are smaller than 16px. Examples: 13px \"Upload a bill or a letter and \"; 13px \"Your documents stay private.\"; 13px \"Upload\"; 13px \"Help\"",
+              "value": 8,
+              "severity": "medium"
+             },
+             {
+              "id": "console-error|http://127.0.0.1:4321|Failed to load appointments: 500",
+              "rule": "console-error",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "Failed to load appointments: 500",
+              "detail": "Browser console error: Failed to load appointments: 500",
+              "severity": "medium"
+             },
+             {
+              "id": "failed-request|http://127.0.0.1:4321|HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+              "rule": "failed-request",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+              "detail": "A file or data request failed: HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+              "severity": "medium"
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/upload|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+              "severity": "serious"
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/upload|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+              "severity": "serious"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321/upload|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "text under 16px",
+              "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the upload page of the\"; 13px \"Back home\"",
+              "value": 2,
+              "severity": "medium"
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/help|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+              "severity": "serious"
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/help|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+              "severity": "serious"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321/help|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "text under 16px",
+              "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the help page of the d\"; 13px \"Back home\"",
+              "value": 2,
+              "severity": "medium"
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/settings|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+              "severity": "serious"
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/settings|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+              "severity": "serious"
+             },
+             {
+              "id": "small-font|http://127.0.0.1:4321/settings|text under 16px",
+              "rule": "small-font",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "text under 16px",
+              "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the settings page of t\"; 13px \"Back home\"",
+              "value": 2,
+              "severity": "medium"
+             },
+             {
+              "id": "page-not-loading|http://127.0.0.1:4321/terms|page",
+              "rule": "page-not-loading",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/terms",
+              "element": "page",
+              "detail": "The server answered with error 404.",
+              "severity": "serious"
+             },
+             {
+              "id": "zoom-blocked|http://127.0.0.1:4321/privacy|meta viewport",
+              "rule": "zoom-blocked",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321/privacy",
+              "element": "meta viewport",
+              "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+              "severity": "serious"
+             },
+             {
+              "id": "axe-color-contrast|http://127.0.0.1:4321/privacy|color-contrast",
+              "rule": "axe-color-contrast",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321/privacy",
+              "element": "color-contrast",
+              "detail": "Elements must meet minimum color contrast ratio thresholds — found on 1 element(s). Examples: h2",
+              "impact": "serious",
+              "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+              "severity": "serious"
+             },
+             {
+              "id": "broken-link|http://127.0.0.1:4321|\"Terms\" → http://127.0.0.1:4321/terms",
+              "rule": "broken-link",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "\"Terms\" → http://127.0.0.1:4321/terms",
+              "detail": "Link is broken: server error 404.",
+              "severity": "serious"
+             },
+             {
+              "id": "broken-link|http://127.0.0.1:4321|\"Privacy\" → http://127.0.0.1:4321/privacy",
+              "rule": "broken-link",
+              "persona": "default",
+              "page": "http://127.0.0.1:4321",
+              "element": "\"Privacy\" → http://127.0.0.1:4321/privacy",
+              "detail": "Link is broken: the page opens but says \"not found\".",
+              "severity": "serious"
+             },
+             {
+              "id": "lowvision-horizontal-scroll|http://127.0.0.1:4321|whole page",
+              "rule": "lowvision-horizontal-scroll",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321",
+              "element": "whole page",
+              "detail": "At 200% zoom the page is 1048px wide on a 640px screen, so the reader must scroll sideways to read each line.",
+              "severity": "medium"
+             },
+             {
+              "id": "lowvision-cut-off|http://127.0.0.1:4321|text outside the screen",
+              "rule": "lowvision-cut-off",
+              "persona": "low-vision",
+              "page": "http://127.0.0.1:4321",
+              "element": "text outside the screen",
+              "detail": "At 200% zoom, 1 piece(s) of text go off the edge of the screen. Examples: div \"Upload a bill or a letter and we explain\"",
+              "value": 1,
+              "severity": "serious"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Upload\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Upload\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Upload\" (50×22px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Help\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Help\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Help\" (36×22px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Settings\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Settings\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Settings\" (58×22px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Terms\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Terms\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Terms\" (35×16px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Privacy\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Privacy\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Privacy\" (42×16px)",
+              "severity": "medium"
+             },
+             {
+              "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Upload\"",
+              "rule": "tremor-wrong-tap",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Upload\"",
+              "detail": "A shaky tap 8px off a \"Upload\" would hit a different control instead: a \"Help\".",
+              "severity": "medium"
+             },
+             {
+              "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Help\"",
+              "rule": "tremor-wrong-tap",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Help\"",
+              "detail": "A shaky tap 8px off a \"Help\" would hit a different control instead: a \"Upload\", a \"Settings\".",
+              "severity": "medium"
+             },
+             {
+              "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Settings\"",
+              "rule": "tremor-wrong-tap",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Settings\"",
+              "detail": "A shaky tap 8px off a \"Settings\" would hit a different control instead: a \"Help\".",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/upload|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/help|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/settings|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)",
+              "severity": "medium"
+             }
+            ],
+            "notChecked": [
+             "Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.",
+             "Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.",
+             "Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.",
+             "Links that are buttons or JavaScript actions (not normal links) are not followed.",
+             "The low-vision and tremor personas are simulations. They do not replace testing with real older adults."
+            ],
+            "harnessErrors": [],
+            "finishedAt": "2026-10-08T20:57:09.848Z",
+            "durationMs": 36567
+           },
+           "previous": {
+            "tool": "Automated Multi-Persona Test Harness",
+            "runId": "2026-10-08T20-30-21-734Z",
+            "target": "http://127.0.0.1:4321",
+            "startedAt": "2026-10-08T20:30:21.736Z",
+            "settings": {
+             "maxPages": 8,
+             "minFontPx": 16,
+             "minTargetPx": 44,
+             "blankScreenLimitMs": 3000
+            },
+            "environment": {
+             "loggedIn": false,
+             "browser": "Chromium 141.0.7390.37"
+            },
+            "pagesTested": [
+             {
+              "url": "http://127.0.0.1:4321",
+              "status": 200,
+              "firstTextMs": 276,
+              "loadMs": 278,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-home-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-home-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/upload",
+              "status": 200,
+              "firstTextMs": 46,
+              "loadMs": 47,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-upload-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-upload-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/help",
+              "status": 200,
+              "firstTextMs": 44,
+              "loadMs": 45,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-help-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-help-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/settings",
+              "status": 200,
+              "firstTextMs": 50,
+              "loadMs": 51,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-settings-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-settings-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/terms",
+              "status": 200,
+              "firstTextMs": 45,
+              "loadMs": 46,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-terms-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-terms-zoom200.png"
+             },
+             {
+              "url": "http://127.0.0.1:4321/privacy",
+              "status": 200,
+              "firstTextMs": 49,
+              "loadMs": 49,
+              "screenshot": "screens/2026-10-08T20-30-21-734Z-privacy-desktop.png",
+              "zoomScreenshot": "screens/2026-10-08T20-30-21-734Z-privacy-zoom200.png"
+             }
+            ],
+            "issues": [
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Terms\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Terms\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Terms\" (49×21px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321|a \"Privacy\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321",
+              "element": "a \"Privacy\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Privacy\" (59×21px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/upload|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/upload",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/help|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/help",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/settings|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/settings",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/terms|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/terms",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+              "severity": "medium"
+             },
+             {
+              "id": "small-target|http://127.0.0.1:4321/privacy|a \"Back home\"",
+              "rule": "small-target",
+              "persona": "tremor",
+              "page": "http://127.0.0.1:4321/privacy",
+              "element": "a \"Back home\"",
+              "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+              "severity": "medium"
+             }
+            ],
+            "notChecked": [
+             "Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.",
+             "Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.",
+             "Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.",
+             "Links that are buttons or JavaScript actions (not normal links) are not followed.",
+             "The low-vision and tremor personas are simulations. They do not replace testing with real older adults."
+            ],
+            "harnessErrors": [],
+            "finishedAt": "2026-10-08T20:30:53.150Z",
+            "durationMs": 31414
+           },
+           "rulesUsed": {
+            "page-not-loading": "serious",
+            "page-crash": "serious",
+            "broken-link": "serious",
+            "blank-screen": "serious",
+            "zoom-blocked": "serious",
+            "lowvision-cut-off": "serious",
+            "axe-color-contrast": "serious",
+            "lowvision-horizontal-scroll": "medium",
+            "lowvision-clipped": "medium",
+            "small-font": "medium",
+            "small-target": "medium",
+            "tremor-wrong-tap": "medium",
+            "console-error": "medium",
+            "failed-request": "medium",
+            "slow-load": "medium"
+           }
+          },
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ],
+    "Compare with last run": [
+     {
+      "startTime": 1791493030022,
+      "executionIndex": 4,
+      "source": [
+       {
+        "previousNode": "Severity rules",
+        "previousNodeOutput": 0,
+        "previousNodeRun": 0
+       }
+      ],
+      "hints": [],
+      "executionTime": 23,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {
+           "tool": "Automated Multi-Persona Test Harness",
+           "runId": "2026-10-08T20-56-33-281Z",
+           "target": "http://127.0.0.1:4321",
+           "startedAt": "2026-10-08T20:56:33.281Z",
+           "settings": {
+            "maxPages": 8,
+            "minFontPx": 16,
+            "minTargetPx": 44,
+            "blankScreenLimitMs": 3000
+           },
+           "environment": {
+            "loggedIn": false,
+            "browser": "Chromium 141.0.7390.37"
+           },
+           "pagesTested": [
+            {
+             "url": "http://127.0.0.1:4321",
+             "status": 200,
+             "firstTextMs": 3594,
+             "loadMs": 3595,
+             "screenshot": "screens/2026-10-08T20-56-33-281Z-home-desktop.png",
+             "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-home-zoom200.png"
+            },
+            {
+             "url": "http://127.0.0.1:4321/upload",
+             "status": 200,
+             "firstTextMs": 55,
+             "loadMs": 56,
+             "screenshot": "screens/2026-10-08T20-56-33-281Z-upload-desktop.png",
+             "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-upload-zoom200.png"
+            },
+            {
+             "url": "http://127.0.0.1:4321/help",
+             "status": 200,
+             "firstTextMs": 60,
+             "loadMs": 61,
+             "screenshot": "screens/2026-10-08T20-56-33-281Z-help-desktop.png",
+             "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-help-zoom200.png"
+            },
+            {
+             "url": "http://127.0.0.1:4321/settings",
+             "status": 200,
+             "firstTextMs": 46,
+             "loadMs": 47,
+             "screenshot": "screens/2026-10-08T20-56-33-281Z-settings-desktop.png",
+             "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-settings-zoom200.png"
+            },
+            {
+             "url": "http://127.0.0.1:4321/terms",
+             "status": 404,
+             "firstTextMs": 37,
+             "loadMs": 37,
+             "screenshot": null
+            },
+            {
+             "url": "http://127.0.0.1:4321/privacy",
+             "status": 200,
+             "firstTextMs": 32,
+             "loadMs": 32,
+             "screenshot": "screens/2026-10-08T20-56-33-281Z-privacy-desktop.png",
+             "zoomScreenshot": "screens/2026-10-08T20-56-33-281Z-privacy-zoom200.png"
+            }
+           ],
+           "issues": [
+            {
+             "id": "blank-screen|http://127.0.0.1:4321|page",
+             "rule": "blank-screen",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "page",
+             "detail": "The screen stayed empty for 3.6 seconds before any text appeared.",
+             "value": 3594,
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "zoom-blocked|http://127.0.0.1:4321|meta viewport",
+             "rule": "zoom-blocked",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321",
+             "element": "meta viewport",
+             "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "axe-color-contrast|http://127.0.0.1:4321|color-contrast",
+             "rule": "axe-color-contrast",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "color-contrast",
+             "detail": "Elements must meet minimum color contrast ratio thresholds — found on 3 element(s). Examples: h1 | .banner | p",
+             "impact": "serious",
+             "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "small-font|http://127.0.0.1:4321|text under 16px",
+             "rule": "small-font",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "text under 16px",
+             "detail": "8 piece(s) of text are smaller than 16px. Examples: 13px \"Upload a bill or a letter and \"; 13px \"Your documents stay private.\"; 13px \"Upload\"; 13px \"Help\"",
+             "value": 8,
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "console-error|http://127.0.0.1:4321|Failed to load appointments: 500",
+             "rule": "console-error",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "Failed to load appointments: 500",
+             "detail": "Browser console error: Failed to load appointments: 500",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "failed-request|http://127.0.0.1:4321|HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+             "rule": "failed-request",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+             "detail": "A file or data request failed: HTTP 404 — http://127.0.0.1:4321/logo-missing.png",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "zoom-blocked|http://127.0.0.1:4321/upload|meta viewport",
+             "rule": "zoom-blocked",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321/upload",
+             "element": "meta viewport",
+             "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "axe-color-contrast|http://127.0.0.1:4321/upload|color-contrast",
+             "rule": "axe-color-contrast",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/upload",
+             "element": "color-contrast",
+             "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+             "impact": "serious",
+             "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "small-font|http://127.0.0.1:4321/upload|text under 16px",
+             "rule": "small-font",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/upload",
+             "element": "text under 16px",
+             "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the upload page of the\"; 13px \"Back home\"",
+             "value": 2,
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "zoom-blocked|http://127.0.0.1:4321/help|meta viewport",
+             "rule": "zoom-blocked",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321/help",
+             "element": "meta viewport",
+             "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "axe-color-contrast|http://127.0.0.1:4321/help|color-contrast",
+             "rule": "axe-color-contrast",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/help",
+             "element": "color-contrast",
+             "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+             "impact": "serious",
+             "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "small-font|http://127.0.0.1:4321/help|text under 16px",
+             "rule": "small-font",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/help",
+             "element": "text under 16px",
+             "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the help page of the d\"; 13px \"Back home\"",
+             "value": 2,
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "zoom-blocked|http://127.0.0.1:4321/settings|meta viewport",
+             "rule": "zoom-blocked",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321/settings",
+             "element": "meta viewport",
+             "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "axe-color-contrast|http://127.0.0.1:4321/settings|color-contrast",
+             "rule": "axe-color-contrast",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/settings",
+             "element": "color-contrast",
+             "detail": "Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)",
+             "impact": "serious",
+             "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "small-font|http://127.0.0.1:4321/settings|text under 16px",
+             "rule": "small-font",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/settings",
+             "element": "text under 16px",
+             "detail": "2 piece(s) of text are smaller than 16px. Examples: 13px \"This is the settings page of t\"; 13px \"Back home\"",
+             "value": 2,
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "page-not-loading|http://127.0.0.1:4321/terms|page",
+             "rule": "page-not-loading",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/terms",
+             "element": "page",
+             "detail": "The server answered with error 404.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "zoom-blocked|http://127.0.0.1:4321/privacy|meta viewport",
+             "rule": "zoom-blocked",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321/privacy",
+             "element": "meta viewport",
+             "detail": "Zooming is blocked by the page settings: \"width=device-width, initial-scale=1, maximum-scale=1\". People with low vision cannot pinch to enlarge text on phones.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "axe-color-contrast|http://127.0.0.1:4321/privacy|color-contrast",
+             "rule": "axe-color-contrast",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321/privacy",
+             "element": "color-contrast",
+             "detail": "Elements must meet minimum color contrast ratio thresholds — found on 1 element(s). Examples: h2",
+             "impact": "serious",
+             "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "broken-link|http://127.0.0.1:4321|\"Terms\" → http://127.0.0.1:4321/terms",
+             "rule": "broken-link",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "\"Terms\" → http://127.0.0.1:4321/terms",
+             "detail": "Link is broken: server error 404.",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "broken-link|http://127.0.0.1:4321|\"Privacy\" → http://127.0.0.1:4321/privacy",
+             "rule": "broken-link",
+             "persona": "default",
+             "page": "http://127.0.0.1:4321",
+             "element": "\"Privacy\" → http://127.0.0.1:4321/privacy",
+             "detail": "Link is broken: the page opens but says \"not found\".",
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "lowvision-horizontal-scroll|http://127.0.0.1:4321|whole page",
+             "rule": "lowvision-horizontal-scroll",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321",
+             "element": "whole page",
+             "detail": "At 200% zoom the page is 1048px wide on a 640px screen, so the reader must scroll sideways to read each line.",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "lowvision-cut-off|http://127.0.0.1:4321|text outside the screen",
+             "rule": "lowvision-cut-off",
+             "persona": "low-vision",
+             "page": "http://127.0.0.1:4321",
+             "element": "text outside the screen",
+             "detail": "At 200% zoom, 1 piece(s) of text go off the edge of the screen. Examples: div \"Upload a bill or a letter and we explain\"",
+             "value": 1,
+             "severity": "serious",
+             "status": "new"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321|a \"Upload\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Upload\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Upload\" (50×22px)",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321|a \"Help\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Help\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Help\" (36×22px)",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321|a \"Settings\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Settings\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Settings\" (58×22px)",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321|a \"Terms\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Terms\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Terms\" (35×16px)",
+             "severity": "medium",
+             "status": "still"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321|a \"Privacy\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Privacy\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Privacy\" (42×16px)",
+             "severity": "medium",
+             "status": "still"
+            },
+            {
+             "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Upload\"",
+             "rule": "tremor-wrong-tap",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Upload\"",
+             "detail": "A shaky tap 8px off a \"Upload\" would hit a different control instead: a \"Help\".",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Help\"",
+             "rule": "tremor-wrong-tap",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Help\"",
+             "detail": "A shaky tap 8px off a \"Help\" would hit a different control instead: a \"Upload\", a \"Settings\".",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "tremor-wrong-tap|http://127.0.0.1:4321|a \"Settings\"",
+             "rule": "tremor-wrong-tap",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321",
+             "element": "a \"Settings\"",
+             "detail": "A shaky tap 8px off a \"Settings\" would hit a different control instead: a \"Help\".",
+             "severity": "medium",
+             "status": "new"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321/upload|a \"Back home\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321/upload",
+             "element": "a \"Back home\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)",
+             "severity": "medium",
+             "status": "still"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321/help|a \"Back home\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321/help",
+             "element": "a \"Back home\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)",
+             "severity": "medium",
+             "status": "still"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321/settings|a \"Back home\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321/settings",
+             "element": "a \"Back home\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Back home\" (66×16px)",
+             "severity": "medium",
+             "status": "still"
+            }
+           ],
+           "notChecked": [
+            "Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.",
+            "Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.",
+            "Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.",
+            "Links that are buttons or JavaScript actions (not normal links) are not followed.",
+            "The low-vision and tremor personas are simulations. They do not replace testing with real older adults."
+           ],
+           "harnessErrors": [],
+           "finishedAt": "2026-10-08T20:57:09.848Z",
+           "durationMs": 36567,
+           "fixed": [
+            {
+             "id": "small-target|http://127.0.0.1:4321/terms|a \"Back home\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321/terms",
+             "element": "a \"Back home\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+             "severity": "medium",
+             "status": "fixed"
+            },
+            {
+             "id": "small-target|http://127.0.0.1:4321/privacy|a \"Back home\"",
+             "rule": "small-target",
+             "persona": "tremor",
+             "page": "http://127.0.0.1:4321/privacy",
+             "element": "a \"Back home\"",
+             "detail": "Tap area is smaller than 44×44px: a \"Back home\" (89×21px)",
+             "severity": "medium",
+             "status": "fixed"
+            }
+           ],
+           "notRetested": [],
+           "comparison": {
+            "hasPrevious": true,
+            "previousRunId": "2026-10-08T20-30-21-734Z",
+            "previousAt": "2026-10-08T20:30:21.736Z",
+            "new": 28,
+            "still": 5,
+            "fixed": 2,
+            "notRetested": 0
+           },
+           "totals": {
+            "serious": 15,
+            "medium": 18,
+            "minor": 0,
+            "all": 33
+           }
+          },
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ],
+    "Build HTML report": [
+     {
+      "startTime": 1791493030045,
+      "executionIndex": 5,
+      "source": [
+       {
+        "previousNode": "Compare with last run",
+        "previousNodeOutput": 0,
+        "previousNodeRun": 0
+       }
+      ],
+      "hints": [],
+      "executionTime": 30,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {
+           "html": "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Test report — http://127.0.0.1:4321</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap\" rel=\"stylesheet\">\n<style>\n  :root { --ink:#1f2430; --muted:#4a5263; --paper:#ffffff; --panel:#f2f4f7; --line:#d5dae2;\n          --serious:#a61b1b; --medium:#8a4b00; --minor:#2b5a86; --fixed:#1e6b34; --unknown:#5b5f6b; }\n  * { box-sizing:border-box; }\n  body { margin:0; background:var(--paper); color:var(--ink); font:18px/1.55 \"Atkinson Hyperlegible\", system-ui, -apple-system, \"Segoe UI\", Arial, sans-serif; }\n  main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }\n  h1 { font-size: 2rem; line-height:1.2; margin:0 0 .4rem; }\n  h2 { font-size: 1.45rem; margin: 0 0 .25rem; }\n  .target { font-size:1.15rem; margin:0; word-break: break-all; }\n  .when { color:var(--muted); margin:.2rem 0 1.5rem; }\n  .summary { font-size:1.35rem; font-weight:700; margin: 0 0 .5rem; }\n  .changes-intro { margin: .5rem 0 .3rem; color:var(--muted); }\n  .changes { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; list-style:none; padding:0; margin:0 0 2rem; }\n  .changes li { font-size:1.1rem; } .changes .good strong { color:var(--fixed); }\n  .sev { border-left: 6px solid var(--line); padding: .25rem 0 .25rem 1.1rem; margin: 0 0 2.25rem; }\n  .sev-serious { border-color: var(--serious); } .sev-serious h2 { color: var(--serious); }\n  .sev-medium { border-color: var(--medium); } .sev-medium h2 { color: var(--medium); }\n  .sev-minor { border-color: var(--minor); } .sev-minor h2 { color: var(--minor); }\n  .sev-fixed { border-color: var(--fixed); } .sev-fixed h2 { color: var(--fixed); }\n  .sev-unknown { border-color: var(--unknown); }\n  .count { font-weight:400; color:var(--muted); }\n  .help { color:var(--muted); margin:0 0 .75rem; }\n  .issues { list-style:none; padding:0; margin:0; }\n  .issue { border-top:1px solid var(--line); padding: .8rem 0; }\n  .issue p { margin: .15rem 0; overflow-wrap:anywhere; }\n  .meta { color:var(--muted); font-size: .95rem; }\n  .status { display:inline-block; font-size:.85rem; font-weight:700; padding:.05rem .5rem; border-radius:4px; border:1.5px solid currentColor; margin-right:.35rem; }\n  .s-new { color: var(--serious); } .s-still { color: var(--muted); } .s-fixed { color: var(--fixed); } .s-not-retested { color: var(--unknown); }\n  .none { color:var(--muted); }\n  .table-wrap { overflow-x:auto; }\n  table { border-collapse: collapse; width:100%; font-size:1rem; }\n  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }\n  th { background: var(--panel); }\n  a { color: #1a4fa0; } a:focus-visible { outline:3px solid #1a4fa0; outline-offset:2px; }\n  .honest { background: var(--panel); padding: 1rem 1.25rem; border-radius: 6px; margin-top: 2.5rem; }\n  .honest h2 { font-size:1.25rem; } .honest h3 { font-size:1.05rem; margin:1rem 0 .25rem; }\n  footer { margin-top:2rem; color:var(--muted); font-size:.95rem; }\n</style></head>\n<body><main>\n  <h1>Accessibility and quality test report</h1>\n  <p class=\"target\">http://127.0.0.1:4321</p>\n  <p class=\"when\">Run on Oct 8, 2026, 1:56 PM · took 37 seconds · not logged in · Chromium 141.0.7390.37</p>\n  <p class=\"summary\">33 problems found: 15 serious, 18 medium, 0 minor.</p>\n  <p class=\"changes-intro\">Compared with the run on Oct 8, 2026, 1:30 PM:</p>\n     <ul class=\"changes\">\n       <li><strong>28</strong> new</li>\n       <li><strong>5</strong> still there</li>\n       <li class=\"good\"><strong>2</strong> fixed</li>\n       <li><strong>0</strong> not tested again</li>\n     </ul>\n  <section class=\"sev sev-serious\" aria-labelledby=\"h-serious\">\n    <h2 id=\"h-serious\">Serious <span class=\"count\">(15)</span></h2>\n    <p class=\"help\">Blocks or seriously harms the user. Fix first.</p>\n    <ul class=\"issues\">\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Empty screen while loading</strong></p>\n    <p>The screen stayed empty for 3.6 seconds before any text appeared.</p>\n    <p class=\"meta\">Item: page &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Zoom is blocked</strong></p>\n    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>\n    <p class=\"meta\">Item: meta viewport &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Accessibility: color contrast</strong></p>\n    <p>Elements must meet minimum color contrast ratio thresholds — found on 3 element(s). Examples: h1 | .banner | p</p>\n    <p class=\"meta\">Item: color-contrast &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href=\"https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright\">How to fix</a></p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Zoom is blocked</strong></p>\n    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>\n    <p class=\"meta\">Item: meta viewport &nbsp;|&nbsp; Where: http://127.0.0.1:4321/upload &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Accessibility: color contrast</strong></p>\n    <p>Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)</p>\n    <p class=\"meta\">Item: color-contrast &nbsp;|&nbsp; Where: http://127.0.0.1:4321/upload &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href=\"https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright\">How to fix</a></p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Zoom is blocked</strong></p>\n    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>\n    <p class=\"meta\">Item: meta viewport &nbsp;|&nbsp; Where: http://127.0.0.1:4321/help &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Accessibility: color contrast</strong></p>\n    <p>Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)</p>\n    <p class=\"meta\">Item: color-contrast &nbsp;|&nbsp; Where: http://127.0.0.1:4321/help &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href=\"https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright\">How to fix</a></p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Zoom is blocked</strong></p>\n    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>\n    <p class=\"meta\">Item: meta viewport &nbsp;|&nbsp; Where: http://127.0.0.1:4321/settings &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Accessibility: color contrast</strong></p>\n    <p>Elements must meet minimum color contrast ratio thresholds — found on 2 element(s). Examples: h1 | p:nth-child(2)</p>\n    <p class=\"meta\">Item: color-contrast &nbsp;|&nbsp; Where: http://127.0.0.1:4321/settings &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href=\"https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright\">How to fix</a></p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Page does not open</strong></p>\n    <p>The server answered with error 404.</p>\n    <p class=\"meta\">Item: page &nbsp;|&nbsp; Where: http://127.0.0.1:4321/terms &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Zoom is blocked</strong></p>\n    <p>Zooming is blocked by the page settings: &quot;width=device-width, initial-scale=1, maximum-scale=1&quot;. People with low vision cannot pinch to enlarge text on phones.</p>\n    <p class=\"meta\">Item: meta viewport &nbsp;|&nbsp; Where: http://127.0.0.1:4321/privacy &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Accessibility: color contrast</strong></p>\n    <p>Elements must meet minimum color contrast ratio thresholds — found on 1 element(s). Examples: h2</p>\n    <p class=\"meta\">Item: color-contrast &nbsp;|&nbsp; Where: http://127.0.0.1:4321/privacy &nbsp;|&nbsp; Who it affects: Every user &nbsp;|&nbsp; <a href=\"https://dequeuniversity.com/rules/axe/4.10/color-contrast?application=playwright\">How to fix</a></p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Broken link</strong></p>\n    <p>Link is broken: server error 404.</p>\n    <p class=\"meta\">Item: &quot;Terms&quot; → http://127.0.0.1:4321/terms &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Broken link</strong></p>\n    <p>Link is broken: the page opens but says &quot;not found&quot;.</p>\n    <p class=\"meta\">Item: &quot;Privacy&quot; → http://127.0.0.1:4321/privacy &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Text runs off the screen at 200% zoom</strong></p>\n    <p>At 200% zoom, 1 piece(s) of text go off the edge of the screen. Examples: div &quot;Upload a bill or a letter and we explain&quot;</p>\n    <p class=\"meta\">Item: text outside the screen &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li></ul>\n  </section><section class=\"sev sev-medium\" aria-labelledby=\"h-medium\">\n    <h2 id=\"h-medium\">Medium <span class=\"count\">(18)</span></h2>\n    <p class=\"help\">Makes the app harder to use.</p>\n    <ul class=\"issues\">\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Text too small</strong></p>\n    <p>8 piece(s) of text are smaller than 16px. Examples: 13px &quot;Upload a bill or a letter and &quot;; 13px &quot;Your documents stay private.&quot;; 13px &quot;Upload&quot;; 13px &quot;Help&quot;</p>\n    <p class=\"meta\">Item: text under 16px &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Browser error message</strong></p>\n    <p>Browser console error: Failed to load appointments: 500</p>\n    <p class=\"meta\">Item: Failed to load appointments: 500 &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Something failed to download</strong></p>\n    <p>A file or data request failed: HTTP 404 — http://127.0.0.1:4321/logo-missing.png</p>\n    <p class=\"meta\">Item: HTTP 404 — http://127.0.0.1:4321/logo-missing.png &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Text too small</strong></p>\n    <p>2 piece(s) of text are smaller than 16px. Examples: 13px &quot;This is the upload page of the&quot;; 13px &quot;Back home&quot;</p>\n    <p class=\"meta\">Item: text under 16px &nbsp;|&nbsp; Where: http://127.0.0.1:4321/upload &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Text too small</strong></p>\n    <p>2 piece(s) of text are smaller than 16px. Examples: 13px &quot;This is the help page of the d&quot;; 13px &quot;Back home&quot;</p>\n    <p class=\"meta\">Item: text under 16px &nbsp;|&nbsp; Where: http://127.0.0.1:4321/help &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Text too small</strong></p>\n    <p>2 piece(s) of text are smaller than 16px. Examples: 13px &quot;This is the settings page of t&quot;; 13px &quot;Back home&quot;</p>\n    <p class=\"meta\">Item: text under 16px &nbsp;|&nbsp; Where: http://127.0.0.1:4321/settings &nbsp;|&nbsp; Who it affects: Every user</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Sideways scrolling at 200% zoom</strong></p>\n    <p>At 200% zoom the page is 1048px wide on a 640px screen, so the reader must scroll sideways to read each line.</p>\n    <p class=\"meta\">Item: whole page &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Low vision (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Upload&quot; (50×22px)</p>\n    <p class=\"meta\">Item: a &quot;Upload&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Help&quot; (36×22px)</p>\n    <p class=\"meta\">Item: a &quot;Help&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Settings&quot; (58×22px)</p>\n    <p class=\"meta\">Item: a &quot;Settings&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Shaky tap hits the wrong control</strong></p>\n    <p>A shaky tap 8px off a &quot;Upload&quot; would hit a different control instead: a &quot;Help&quot;.</p>\n    <p class=\"meta\">Item: a &quot;Upload&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Shaky tap hits the wrong control</strong></p>\n    <p>A shaky tap 8px off a &quot;Help&quot; would hit a different control instead: a &quot;Upload&quot;, a &quot;Settings&quot;.</p>\n    <p class=\"meta\">Item: a &quot;Help&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-new\">New</span> <strong>Shaky tap hits the wrong control</strong></p>\n    <p>A shaky tap 8px off a &quot;Settings&quot; would hit a different control instead: a &quot;Help&quot;.</p>\n    <p class=\"meta\">Item: a &quot;Settings&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-still\">Still there</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Terms&quot; (35×16px)</p>\n    <p class=\"meta\">Item: a &quot;Terms&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-still\">Still there</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Privacy&quot; (42×16px)</p>\n    <p class=\"meta\">Item: a &quot;Privacy&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321 &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-still\">Still there</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (66×16px)</p>\n    <p class=\"meta\">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321/upload &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-still\">Still there</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (66×16px)</p>\n    <p class=\"meta\">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321/help &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-still\">Still there</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (66×16px)</p>\n    <p class=\"meta\">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321/settings &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li></ul>\n  </section><section class=\"sev sev-minor\" aria-labelledby=\"h-minor\">\n    <h2 id=\"h-minor\">Minor <span class=\"count\">(0)</span></h2>\n    <p class=\"help\">Small polish problems.</p>\n    <p class=\"none\">None.</p>\n  </section>\n  <section class=\"sev sev-fixed\" aria-labelledby=\"h-fixed\">\n  <h2 id=\"h-fixed\">Fixed since last run <span class=\"count\">(2)</span></h2>\n  <ul class=\"issues\">\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-fixed\">Fixed</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (89×21px)</p>\n    <p class=\"meta\">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321/terms &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li>\n  <li class=\"issue\">\n    <p class=\"issue-head\"><span class=\"status s-fixed\">Fixed</span> <strong>Tap area too small</strong></p>\n    <p>Tap area is smaller than 44×44px: a &quot;Back home&quot; (89×21px)</p>\n    <p class=\"meta\">Item: a &quot;Back home&quot; &nbsp;|&nbsp; Where: http://127.0.0.1:4321/privacy &nbsp;|&nbsp; Who it affects: Hand tremor (simulated)</p>\n  </li></ul></section>\n  \n  <section aria-labelledby=\"h-pages\">\n    <h2 id=\"h-pages\">Pages tested (6)</h2>\n    <p class=\"help\">\"First text\" is how long the screen stayed empty. Screenshots open in the same folder as this report.</p>\n    <div class=\"table-wrap\"><table>\n      <thead><tr><th scope=\"col\">Page</th><th scope=\"col\">Answer</th><th scope=\"col\">First text</th><th scope=\"col\">Fully loaded</th><th scope=\"col\">Screenshots</th></tr></thead>\n      <tbody><tr>\n  <td>http://127.0.0.1:4321</td><td>200</td>\n  <td>3.6 s</td><td>3.6 s</td>\n  <td><a href=\"screens/2026-10-08T20-56-33-281Z-home-desktop.png\">Normal</a> · <a href=\"screens/2026-10-08T20-56-33-281Z-home-zoom200.png\">200% zoom</a></td></tr><tr>\n  <td>http://127.0.0.1:4321/upload</td><td>200</td>\n  <td>0.1 s</td><td>0.1 s</td>\n  <td><a href=\"screens/2026-10-08T20-56-33-281Z-upload-desktop.png\">Normal</a> · <a href=\"screens/2026-10-08T20-56-33-281Z-upload-zoom200.png\">200% zoom</a></td></tr><tr>\n  <td>http://127.0.0.1:4321/help</td><td>200</td>\n  <td>0.1 s</td><td>0.1 s</td>\n  <td><a href=\"screens/2026-10-08T20-56-33-281Z-help-desktop.png\">Normal</a> · <a href=\"screens/2026-10-08T20-56-33-281Z-help-zoom200.png\">200% zoom</a></td></tr><tr>\n  <td>http://127.0.0.1:4321/settings</td><td>200</td>\n  <td>0.0 s</td><td>0.0 s</td>\n  <td><a href=\"screens/2026-10-08T20-56-33-281Z-settings-desktop.png\">Normal</a> · <a href=\"screens/2026-10-08T20-56-33-281Z-settings-zoom200.png\">200% zoom</a></td></tr><tr>\n  <td>http://127.0.0.1:4321/terms</td><td>404</td>\n  <td>0.0 s</td><td>0.0 s</td>\n  <td>—</td></tr><tr>\n  <td>http://127.0.0.1:4321/privacy</td><td>200</td>\n  <td>0.0 s</td><td>0.0 s</td>\n  <td><a href=\"screens/2026-10-08T20-56-33-281Z-privacy-desktop.png\">Normal</a> · <a href=\"screens/2026-10-08T20-56-33-281Z-privacy-zoom200.png\">200% zoom</a></td></tr></tbody>\n    </table></div>\n  </section>\n  <section class=\"honest\" aria-labelledby=\"h-honest\">\n    <h2 id=\"h-honest\">What this run did not check</h2>\n    <ul><li>Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.</li><li>Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.</li><li>Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.</li><li>Links that are buttons or JavaScript actions (not normal links) are not followed.</li><li>The low-vision and tremor personas are simulations. They do not replace testing with real older adults.</li></ul>\n    <p>Every planned check ran.</p>\n  </section>\n  <footer>Automated Multi-Persona Test Harness · fixed rules, no AI · run ID 2026-10-08T20-56-33-281Z</footer>\n</main></body></html>",
+           "runId": "2026-10-08T20-56-33-281Z",
+           "target": "http://127.0.0.1:4321",
+           "totals": {
+            "serious": 15,
+            "medium": 18,
+            "minor": 0,
+            "all": 33
+           },
+           "comparison": {
+            "hasPrevious": true,
+            "previousRunId": "2026-10-08T20-30-21-734Z",
+            "previousAt": "2026-10-08T20:30:21.736Z",
+            "new": 28,
+            "still": 5,
+            "fixed": 2,
+            "notRetested": 0
+           }
+          },
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ],
+    "Save report": [
+     {
+      "startTime": 1791493030076,
+      "executionIndex": 6,
+      "source": [
+       {
+        "previousNode": "Build HTML report",
+        "previousNodeOutput": 0,
+        "previousNodeRun": 0
+       }
+      ],
+      "hints": [],
+      "executionTime": 44,
+      "executionStatus": "success",
+      "data": {
+       "main": [
+        [
+         {
+          "json": {
+           "saved": true,
+           "file": "reports\\report-127.0.0.1_4321-2026-10-08T20-56-33-281Z.html",
+           "openInBrowser": "http://127.0.0.1:3456/report"
+          },
+          "pairedItem": {
+           "item": 0
+          }
+         }
+        ]
+       ]
+      }
+     }
+    ]
+   },
+   "lastNodeExecuted": "Save report"
+  },
+  "executionData": {
+   "contextData": {},
+   "nodeExecutionStack": [],
+   "metadata": {},
+   "waitingExecution": {},
+   "waitingExecutionSource": {},
+   "runtimeData": {
+    "version": 1,
+    "establishedAt": 1791492993086,
+    "source": "cli",
+    "triggerNode": {
+     "name": "Click to start",
+     "type": "n8n-nodes-base.manualTrigger"
+    }
+   }
+  }
+ },
+ "mode": "cli",
+ "startedAt": "2026-10-08T20:56:33.075Z",
+ "stoppedAt": "2026-10-08T20:57:10.121Z",
+ "storedAt": "db",
+ "status": "success",
+ "finished": true
+}

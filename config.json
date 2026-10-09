@@ -1,0 +1,11 @@
+{
+  "targetUrl": "https://mai-hakim.github.io/papershield/",
+  "maxPages": 8,
+  "maxLinksToCheck": 40,
+  "minFontPx": 16,
+  "minTargetPx": 44,
+  "blankScreenLimitMs": 3000,
+  "pageTimeoutMs": 30000,
+  "useSavedLogin": false,
+  "extraPaths": []
+}

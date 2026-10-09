@@ -1,0 +1,37 @@
+{
+  "tool": "Automated Multi-Persona Test Harness",
+  "runId": "2026-10-08T20-31-50-658Z",
+  "target": "https://mai-hakim.github.io/papershield/",
+  "startedAt": "2026-10-08T20:31:50.659Z",
+  "settings": {
+    "maxPages": 8,
+    "minFontPx": 16,
+    "minTargetPx": 44,
+    "blankScreenLimitMs": 3000
+  },
+  "environment": {
+    "loggedIn": false,
+    "browser": "Chromium 141.0.7390.37"
+  },
+  "pagesTested": [
+    {
+      "url": "https://mai-hakim.github.io/papershield/",
+      "status": 200,
+      "firstTextMs": 239,
+      "loadMs": 1631,
+      "screenshot": "screens/2026-10-08T20-31-50-658Z-papershield-desktop.png",
+      "zoomScreenshot": "screens/2026-10-08T20-31-50-658Z-papershield-zoom200.png"
+    }
+  ],
+  "issues": [],
+  "notChecked": [
+    "Pages behind a login were NOT tested (no saved login was used). Their results are UNKNOWN.",
+    "Uploading documents and checking the AI summaries, appointments and warnings is NOT automated in this version.",
+    "Overlapping elements at 200% zoom are not detected; check the zoom screenshots by eye.",
+    "Links that are buttons or JavaScript actions (not normal links) are not followed.",
+    "The low-vision and tremor personas are simulations. They do not replace testing with real older adults."
+  ],
+  "harnessErrors": [],
+  "finishedAt": "2026-10-08T20:32:01.764Z",
+  "durationMs": 11105
+}
