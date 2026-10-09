@@ -4,3 +4,5 @@ results/
 reports/
 .env
 .n8n-data/
+docs/demo/*.webm
+docs/demo/tmp/

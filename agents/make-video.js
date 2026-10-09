@@ -12,15 +12,15 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
   const tmp = path.join(path.dirname(OUT), 'tmp'); fs.mkdirSync(tmp, { recursive: true });
   const b = await chromium.launch(); const t0 = Date.now();
-  const res = await runAgent(b, { target, persona, runNo: 1, recordVideoDir: tmp, captions: true, keepOpen: true });
+  const res = await runAgent(b, { target, persona, runNo: 1, recordVideoDir: tmp, captions: true, keepOpen: true, desktopLayout: /todomvc/.test(target) }); // TodoMVC has no mobile viewport tag: show it at readable size
   const { page, ctx } = res;
   await describeFindings(res.issues.filter(f => !/^axe-/.test(f.rule)).slice(0, 25), res.rec.personaLabel);
   res.issues.forEach(f => { f.run = 1; });
   const current = { tool: 'Agentic App Tester', runId: 'video-' + Date.now(), target, startedAt: new Date(t0).toISOString(), settings: { runsPerAgent: 1 }, environment: { browser: 'Chromium ' + b.version() },
     agents: [res.rec], issues: res.issues, unconfirmed: res.unconfirmed, pagesTested: [{ url: target }], notChecked: ['Demo video: one agent, one run.'], harnessErrors: res.harnessErrors, ai: null };
   let d = step('agents-1-severity.js', { current, previous: null }); d = step('agents-2-consistency.js', d); const r = step('agents-3-report.js', d);
-  await page.setContent(r.html); await page.evaluate(() => document.documentElement.style.zoom = '0.8');
-  const cap = t => page.evaluate(t => { let c = document.getElementById('cap2'); if (!c) { c = document.createElement('div'); c.id = 'cap2'; c.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:9;padding:9px 11px;border-radius:12px;background:rgba(15,42,48,.93);color:#fff;font:700 15px/1.35 system-ui;pointer-events:none'; document.body.appendChild(c); } c.textContent = t; }, t);
+  await page.setContent(r.html); await page.evaluate(() => document.documentElement.style.zoom = '0.9');
+  const cap = t => page.evaluate(t => { let c = document.getElementById('cap2'); if (!c) { c = document.createElement('div'); c.id = 'cap2'; c.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:9;padding:9px 11px;border-radius:12px;background:rgba(15,42,48,.93);color:#fff;font:700 17px/1.35 system-ui;pointer-events:none'; document.body.appendChild(c); } c.textContent = t; }, t);
   await cap('The agent is done. Now FIXED checks confirm what it found, and fixed rules in n8n set the severity.'); await wait(5000);
   await page.evaluate(() => document.querySelector('h2:nth-of-type(2)') && document.querySelectorAll('h2')[1].scrollIntoView()); await cap('Confirmed findings — each one names the check that proved it. The AI only wrote the plain words.'); await wait(7000);
   await page.mouse.wheel(0, 500); await wait(4000);

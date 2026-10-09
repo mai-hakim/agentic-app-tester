@@ -68,7 +68,7 @@ async function screenState(page) {
 }
 async function caption(page, text) {
   await page.evaluate(t => { let c = document.getElementById('agent-cap'); if (!c) { c = document.createElement('div'); c.id = 'agent-cap';
-    c.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:2147483647;padding:8px 10px;border-radius:12px;background:rgba(15,42,48,.92);color:#fff;font:700 13px/1.35 system-ui,sans-serif;pointer-events:none;zoom:1';
+    c.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:2147483647;padding:8px 10px;border-radius:12px;background:rgba(15,42,48,.92);color:#fff;font:700 16px/1.35 system-ui,sans-serif;pointer-events:none;zoom:1';
     document.documentElement.appendChild(c); } c.textContent = t; }, text).catch(() => {});
 }
 const describe = el => el ? `${el.tag} "${el.label || el.type || '(no label)'}"` : 'page';
@@ -139,10 +139,10 @@ async function checkScreen(page, ctxInfo, seen) {
 }
 
 // ---------- one agent, one run ----------
-async function runAgent(browser, { target, persona, runNo, shotsDir, recordVideoDir, captions, keepOpen }) {
+async function runAgent(browser, { target, persona, runNo, shotsDir, recordVideoDir, captions, keepOpen, desktopLayout }) {
   const P = PERSONAS[persona]; const { appName, task } = taskFor(target, persona);
   const zoom = P.browser.zoom || 1, tremor = P.browser.tremorPx || 0;
-  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: false, locale: 'en-US', ...(recordVideoDir ? { recordVideo: { dir: recordVideoDir, size: { width: 390, height: 844 } } } : {}) });
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: !desktopLayout, hasTouch: false, locale: 'en-US', ...(recordVideoDir ? { recordVideo: { dir: recordVideoDir, size: { width: 390, height: 844 } } } : {}) });
   if (zoom > 1) await ctx.addInitScript(z => { const set = () => { if (document.documentElement) document.documentElement.style.zoom = z; }; document.addEventListener('DOMContentLoaded', set); set(); }, String(zoom));
   const page = await ctx.newPage();
   const consoleErrors = [];

@@ -4,7 +4,7 @@
 
 AI agents use a web app the way four different people might. Every problem they run into must be **confirmed by a fixed check** before it counts, and **fixed rules decide how serious it is**. Runs on a laptop with n8n, Playwright, axe-core and the Gemini free tier. It works on any web app that has a URL.
 
-**Demo video:** [docs/demo/agents-demo.webm](docs/demo/agents-demo.webm). An agent with a simulated hand tremor uses a public app, its thinking shows as captions, and the fixed checks confirm what went wrong.
+**Demo video:** [docs/demo/agents-demo.mp4](docs/demo/agents-demo.mp4) (42 s, MP4). Recorded with Playwright, then converted to H.264 MP4 at 1.25× speed with ffmpeg so it plays on iPhone, Android and every desktop browser. An agent with a simulated hand tremor uses a public app, its thinking shows as captions, and the fixed checks confirm what went wrong.
 **Sample reports from real runs:** [sample-reports/](sample-reports/)
 
 ![Architecture](docs/architecture.png)
